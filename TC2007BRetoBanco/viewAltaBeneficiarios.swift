@@ -17,8 +17,8 @@ struct AltaBeneficiarios: View {
     
     @State private var name: String = ""
     @State private var lastName: String = ""
-    @State private var benefitsNumber: String = ""
     @State private var comunity: String = ""
+    @State private var benefitsNumber: Int = 0
     
     var body: some View {
         VStack {
@@ -45,10 +45,23 @@ struct AltaBeneficiarios: View {
                     .padding(.leading, -150)
                     .foregroundColor(textos)
 
-                // El textfield va a estar cargado con lo que tenga la db
-                TextField("4", text: $benefitsNumber)
-                    .padding(.leading, 45)
-                    .padding(.bottom, 30)
+                Stepper{
+                    Text("\(benefitsNumber)")
+                     } onIncrement: {
+                        benefitsNumber += 1
+                         if(benefitsNumber == 6){
+                             benefitsNumber = 0
+                         }
+                     } onDecrement: {
+                         benefitsNumber -= 1
+                         if(benefitsNumber < 0){
+                             benefitsNumber = 0
+                         }
+                     }
+                     .padding(.leading, 45)
+                     .padding(.bottom, 30)
+                     .padding()
+                     .foregroundColor(Color.gray)
                 
                 Text("Comunidad:")
                     .padding(.leading, -170)
@@ -68,7 +81,7 @@ struct AltaBeneficiarios: View {
             Button( action: {
                 print("Hola")
             }, label:{
-                    Text("Dar de Baja")
+                    Text("Registrar")
                     .foregroundColor(.white)
             })
             .padding(.top, 25)
