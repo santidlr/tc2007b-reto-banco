@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     var body: some View {
         VStack {
@@ -16,6 +17,7 @@ struct ContentView: View {
             Text("Hello, Banco!")
         }
         .padding()
+        
     }
 }
 
@@ -24,3 +26,5 @@ struct ContentViewPreviews: PreviewProvider{
         ContentView()
     }
 }
+
+
