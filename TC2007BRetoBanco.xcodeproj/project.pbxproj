@@ -14,7 +14,6 @@
 		297A7AD62AC67C520014F0C4 /* TC2007BRetoBancoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7AD52AC67C520014F0C4 /* TC2007BRetoBancoTests.swift */; };
 		297A7AE02AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */; };
 		297A7AE22AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */; };
-		530447612ACD3FB600768F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530447602ACD3FB600768F50 /* GoogleService-Info.plist */; };
 		530447642ACD420400768F50 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 530447632ACD420400768F50 /* FirebaseAnalytics */; };
 		530447662ACD420400768F50 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 530447652ACD420400768F50 /* FirebaseAnalyticsOnDeviceConversion */; };
 		530447682ACD420400768F50 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 530447672ACD420400768F50 /* FirebaseAnalyticsSwift */; };
@@ -42,6 +41,10 @@
 		530447942ACD420400768F50 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 530447932ACD420400768F50 /* FirebaseRemoteConfigSwift */; };
 		530447962ACD420400768F50 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 530447952ACD420400768F50 /* FirebaseStorage */; };
 		530447982ACD420400768F50 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 530447972ACD420400768F50 /* FirebaseStorageCombine-Community */; };
+		5392D8A42ACE25A800782028 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5392D8A32ACE25A800782028 /* GoogleService-Info.plist */; };
+		53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */; };
+		53AC250F2ACE6E30001E7B3D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC250E2ACE6E30001E7B3D /* TabBar.swift */; };
+		53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */; };
 		53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +76,10 @@
 		297A7ADB2AC67C520014F0C4 /* TC2007BRetoBancoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TC2007BRetoBancoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITests.swift; sourceTree = "<group>"; };
 		297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		530447602ACD3FB600768F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5392D8A32ACE25A800782028 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detallesEntrega.swift; sourceTree = "<group>"; };
+		53AC250E2ACE6E30001E7B3D /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listaBeneficiarios.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,10 +158,13 @@
 		297A7AC32AC67C510014F0C4 /* TC2007BRetoBanco */ = {
 			isa = PBXGroup;
 			children = (
-				530447602ACD3FB600768F50 /* GoogleService-Info.plist */,
 				53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */,
+				53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */,
+				53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */,
+				53AC250E2ACE6E30001E7B3D /* TabBar.swift */,
 				297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */,
 				297A7AC62AC67C510014F0C4 /* ContentView.swift */,
+				5392D8A32ACE25A800782028 /* GoogleService-Info.plist */,
 				297A7AC82AC67C520014F0C4 /* Assets.xcassets */,
 				297A7ACA2AC67C520014F0C4 /* Preview Content */,
 			);
@@ -325,7 +334,7 @@
 			files = (
 				297A7ACC2AC67C520014F0C4 /* Preview Assets.xcassets in Resources */,
 				297A7AC92AC67C520014F0C4 /* Assets.xcassets in Resources */,
-				530447612ACD3FB600768F50 /* GoogleService-Info.plist in Resources */,
+				5392D8A42ACE25A800782028 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,8 +360,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */,
+				53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */,
+				53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */,
 				297A7AC72AC67C510014F0C4 /* ContentView.swift in Sources */,
 				297A7AC52AC67C510014F0C4 /* TC2007BRetoBancoApp.swift in Sources */,
+				53AC250F2ACE6E30001E7B3D /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
