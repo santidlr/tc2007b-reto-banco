@@ -30,7 +30,7 @@ struct listaBeneficiarios: View {
                                             .foregroundColor(.orange)
                                         
                                     }
-                                    HStack(alignment: .center, spacing: 10){
+                                    HStack(alignment: .center, spacing: 40){
                                         Text("\(delivery.direction)")
                                             .font(.subheadline)
                                         Text("\(delivery.date)")
