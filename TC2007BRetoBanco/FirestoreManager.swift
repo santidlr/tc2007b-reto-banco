@@ -47,7 +47,8 @@ struct FirestoreManager {
                     }
                 }
             }
-        }
+    }
+    
     static func getEntregas(completion: @escaping ([Delivery]) -> Void){
         db.collection("deliveries").getDocuments(){(QuerySnapshot, err) in
             if let err = err{
