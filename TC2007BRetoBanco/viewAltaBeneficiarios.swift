@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let textos = Color(red: 255 / 255, green: 108 / 255, blue: 90 / 255)
+//let textos = Color(red: 255 / 255, green: 108 / 255, blue: 90 / 255)
 let botones = Color(red: 255 / 255, green: 108 / 255, blue: 95 / 255)
 
 // La turbo cagaste, esta vista no era la que tenías que hacer

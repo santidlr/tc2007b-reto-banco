@@ -14,6 +14,13 @@
 		297A7AE02AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */; };
 		297A7AE22AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */; };
 		9B1ADF2F2AC7C4F500422673 /* viewAltaBeneficiarios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1ADF2E2AC7C4F500422673 /* viewAltaBeneficiarios.swift */; };
+		9B4EA3112ACF89D80056B0DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA3102ACF89D80056B0DD /* ContentView.swift */; };
+		9B4EA31F2ACF8A800056B0DD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA31C2ACF8A7F0056B0DD /* HomeView.swift */; };
+		9B4EA3202ACF8A800056B0DD /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA31D2ACF8A7F0056B0DD /* TitleBar.swift */; };
+		9B4EA3212ACF8A800056B0DD /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA31E2ACF8A800056B0DD /* NavBar.swift */; };
+		9B4EA3222ACF8AA60056B0DD /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA3192ACF8A6F0056B0DD /* TitleBar.swift */; };
+		9B4EA3232ACF8AA60056B0DD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA31B2ACF8A700056B0DD /* HomeView.swift */; };
+		9B4EA3242ACF8AA60056B0DD /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4EA31A2ACF8A6F0056B0DD /* NavBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +50,14 @@
 		297A7ADB2AC67C520014F0C4 /* TC2007BRetoBancoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TC2007BRetoBancoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITests.swift; sourceTree = "<group>"; };
 		297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		9B1ADF2C2AC7BF2100422673 /* viewAltaBeneficiarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = viewAltaBeneficiarios.swift; path = ../../../Desktop/test/Yahir/Yahir/viewAltaBeneficiarios.swift; sourceTree = "<group>"; };
 		9B1ADF2E2AC7C4F500422673 /* viewAltaBeneficiarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewAltaBeneficiarios.swift; sourceTree = "<group>"; };
+		9B4EA3102ACF89D80056B0DD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../../Desktop/Home/Home/ContentView.swift; sourceTree = "<group>"; };
+		9B4EA3192ACF8A6F0056B0DD /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBar.swift; sourceTree = "<group>"; };
+		9B4EA31A2ACF8A6F0056B0DD /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		9B4EA31B2ACF8A700056B0DD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9B4EA31C2ACF8A7F0056B0DD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9B4EA31D2ACF8A7F0056B0DD /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBar.swift; sourceTree = "<group>"; };
+		9B4EA31E2ACF8A800056B0DD /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +88,6 @@
 		297A7AB82AC67C510014F0C4 = {
 			isa = PBXGroup;
 			children = (
-				9B1ADF232AC7BE7400422673 /* TC2007BYahirBranch */,
 				297A7AC32AC67C510014F0C4 /* TC2007BRetoBanco */,
 				297A7AD42AC67C520014F0C4 /* TC2007BRetoBancoTests */,
 				297A7ADE2AC67C520014F0C4 /* TC2007BRetoBancoUITests */,
@@ -96,8 +108,12 @@
 		297A7AC32AC67C510014F0C4 /* TC2007BRetoBanco */ = {
 			isa = PBXGroup;
 			children = (
-				297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */,
 				9B1ADF2E2AC7C4F500422673 /* viewAltaBeneficiarios.swift */,
+				297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */,
+				9B4EA3102ACF89D80056B0DD /* ContentView.swift */,
+				9B4EA31B2ACF8A700056B0DD /* HomeView.swift */,
+				9B4EA3192ACF8A6F0056B0DD /* TitleBar.swift */,
+				9B4EA31A2ACF8A6F0056B0DD /* NavBar.swift */,
 				297A7AC82AC67C520014F0C4 /* Assets.xcassets */,
 				297A7ACA2AC67C520014F0C4 /* Preview Content */,
 			);
@@ -123,18 +139,13 @@
 		297A7ADE2AC67C520014F0C4 /* TC2007BRetoBancoUITests */ = {
 			isa = PBXGroup;
 			children = (
+				9B4EA31C2ACF8A7F0056B0DD /* HomeView.swift */,
+				9B4EA31D2ACF8A7F0056B0DD /* TitleBar.swift */,
+				9B4EA31E2ACF8A800056B0DD /* NavBar.swift */,
 				297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */,
 				297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */,
 			);
 			path = TC2007BRetoBancoUITests;
-			sourceTree = "<group>";
-		};
-		9B1ADF232AC7BE7400422673 /* TC2007BYahirBranch */ = {
-			isa = PBXGroup;
-			children = (
-				9B1ADF2C2AC7BF2100422673 /* viewAltaBeneficiarios.swift */,
-			);
-			path = TC2007BYahirBranch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,8 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B4EA3222ACF8AA60056B0DD /* TitleBar.swift in Sources */,
 				297A7AC52AC67C510014F0C4 /* TC2007BRetoBancoApp.swift in Sources */,
 				9B1ADF2F2AC7C4F500422673 /* viewAltaBeneficiarios.swift in Sources */,
+				9B4EA3232ACF8AA60056B0DD /* HomeView.swift in Sources */,
+				9B4EA3112ACF89D80056B0DD /* ContentView.swift in Sources */,
+				9B4EA3242ACF8AA60056B0DD /* NavBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +299,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B4EA3212ACF8A800056B0DD /* NavBar.swift in Sources */,
+				9B4EA3202ACF8A800056B0DD /* TitleBar.swift in Sources */,
+				9B4EA31F2ACF8A800056B0DD /* HomeView.swift in Sources */,
 				297A7AE02AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift in Sources */,
 				297A7AE22AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift in Sources */,
 			);

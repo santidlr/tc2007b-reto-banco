@@ -11,7 +11,7 @@ import SwiftUI
 struct TC2007BRetoBancoApp: App {
     var body: some Scene {
         WindowGroup {
-            AltaBeneficiarios()
+            ContentView()
         }
     }
 }
