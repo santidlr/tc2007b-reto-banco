@@ -18,7 +18,7 @@ struct Login: View {
     
     var body: some View {
         if userIsLoggedIn {
-            listaBeneficiarios()
+            ContentView()
         } else {
             content
         }
