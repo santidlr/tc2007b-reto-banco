@@ -12,7 +12,7 @@ struct listaBeneficiarios: View {
     @State private var deliveries: [Delivery] = []
     
     var body: some View {
-        NavigationStack{
+        //NavigationView{
                 List{
                     Section("Pendientes"){
                         ForEach(deliveries, id: \.self) { delivery in
@@ -40,7 +40,7 @@ struct listaBeneficiarios: View {
                                     }
                                 }
                             }
-                        }
+                       // }
                     }
                 }
         .navigationTitle("Tus entregas")

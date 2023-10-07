@@ -56,6 +56,7 @@ struct FirestoreManager {
                 completion([])
             } else{
                 var deliveries = [Delivery]()
+                deliveries.removeAll()
                 for document in QuerySnapshot!.documents{
                     let data = document.data()
                     let direction = data["direction"] as? String ?? ""

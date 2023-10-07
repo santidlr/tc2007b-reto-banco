@@ -46,6 +46,9 @@
 		53AC250F2ACE6E30001E7B3D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC250E2ACE6E30001E7B3D /* TabBar.swift */; };
 		53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */; };
 		53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */; };
+		8BC55B9B2AD08F97007879CE /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC55B982AD08F97007879CE /* TitleBar.swift */; };
+		8BC55B9C2AD08F97007879CE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC55B992AD08F97007879CE /* HomeView.swift */; };
+		8BC55B9D2AD08F97007879CE /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC55B9A2AD08F97007879CE /* NavBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		53AC250E2ACE6E30001E7B3D /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listaBeneficiarios.swift; sourceTree = "<group>"; };
+		8BC55B982AD08F97007879CE /* TitleBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleBar.swift; path = ../../TitleBar.swift; sourceTree = "<group>"; };
+		8BC55B992AD08F97007879CE /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = ../../HomeView.swift; sourceTree = "<group>"; };
+		8BC55B9A2AD08F97007879CE /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavBar.swift; path = ../../NavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,9 @@
 		297A7AC32AC67C510014F0C4 /* TC2007BRetoBanco */ = {
 			isa = PBXGroup;
 			children = (
+				8BC55B992AD08F97007879CE /* HomeView.swift */,
+				8BC55B9A2AD08F97007879CE /* NavBar.swift */,
+				8BC55B982AD08F97007879CE /* TitleBar.swift */,
 				53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */,
 				53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */,
 				53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */,
@@ -361,8 +370,11 @@
 			files = (
 				53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */,
 				53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */,
+				8BC55B9D2AD08F97007879CE /* NavBar.swift in Sources */,
 				53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */,
+				8BC55B9B2AD08F97007879CE /* TitleBar.swift in Sources */,
 				297A7AC72AC67C510014F0C4 /* ContentView.swift in Sources */,
+				8BC55B9C2AD08F97007879CE /* HomeView.swift in Sources */,
 				297A7AC52AC67C510014F0C4 /* TC2007BRetoBancoApp.swift in Sources */,
 				53AC250F2ACE6E30001E7B3D /* TabBar.swift in Sources */,
 			);
