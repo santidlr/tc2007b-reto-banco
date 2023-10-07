@@ -1,9 +1,11 @@
 //
 //  HomeView.swift
+
 //  TC2007BRetoBanco
 //
 //  Created by user241186 on 10/6/23.
 //
+
 
 import SwiftUI
 
@@ -17,6 +19,7 @@ struct HomeView: View {
     @State private var serviceHours: String = "0"
     
     var body: some View {
+
         NavigationStack{
             ScrollView{
                 VStack{
@@ -81,11 +84,13 @@ struct HomeView: View {
                         }, label: {
                             Text("Comunidad")
                                 .foregroundColor(.gray)
+
                         })
                         
                         NavigationLink(destination: listaBeneficiarios()){
                             Text("Lista")
                                 .foregroundColor(.gray)
+
                         }
                     }
                 }

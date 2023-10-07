@@ -12,6 +12,7 @@ struct listaBeneficiarios: View {
     @State private var deliveries: [Delivery] = []
     
     var body: some View {
+
         NavigationStack{
             List{
                 Section("Pendientes"){
@@ -41,7 +42,6 @@ struct listaBeneficiarios: View {
                                 Text("\(delivery.numberPeople)")
                                     .font(.subheadline)
                             }
-                        }
                     }
                 }
                 .navigationTitle("Tus entregas")
