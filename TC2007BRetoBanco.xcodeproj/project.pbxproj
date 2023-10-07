@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		293A1CF82AD0973600FD7DAA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293A1CF72AD0973600FD7DAA /* Login.swift */; };
 		297A7AC52AC67C510014F0C4 /* TC2007BRetoBancoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */; };
 		297A7AC72AC67C510014F0C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7AC62AC67C510014F0C4 /* ContentView.swift */; };
 		297A7AC92AC67C520014F0C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 297A7AC82AC67C520014F0C4 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		293A1CF72AD0973600FD7DAA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		297A7AC12AC67C510014F0C4 /* TC2007BRetoBanco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TC2007BRetoBanco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoApp.swift; sourceTree = "<group>"; };
 		297A7AC62AC67C510014F0C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				53AC250E2ACE6E30001E7B3D /* TabBar.swift */,
 				297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */,
 				297A7AC62AC67C510014F0C4 /* ContentView.swift */,
+				293A1CF72AD0973600FD7DAA /* Login.swift */,
 				29CB5EF52ACFE19600A59638 /* GoogleService-Info.plist */,
 				297A7AC82AC67C520014F0C4 /* Assets.xcassets */,
 				297A7ACA2AC67C520014F0C4 /* Preview Content */,
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				293A1CF82AD0973600FD7DAA /* Login.swift in Sources */,
 				53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */,
 				53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */,
 				53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */,
