@@ -11,6 +11,7 @@ import Firebase
 struct FirestoreManager {
     static let db = Firestore.firestore()
 
+  
     static func getEntregas(completion: @escaping ([Delivery]) -> Void){
         db.collection("deliveries").getDocuments(){(QuerySnapshot, err) in
             if let err = err{
