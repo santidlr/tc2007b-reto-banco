@@ -2,10 +2,14 @@
 //  Login.swift
 //  TC2007BRetoBanco
 //
-//  Created by Santiago De Lira Robles on 06/10/23.
+
+//  Created by user241186 on 10/6/23.
 //
 
 import SwiftUI
+
+import SwiftUI
+
 import Firebase
 
 struct Login: View {
@@ -138,10 +142,9 @@ struct Login: View {
     
 
 
-
-
-#Preview {
-    Login()
+struct Login_Previews: PreviewProvider {
+    static var previews: some View {
+        Login()
+    }
 }
-
 
