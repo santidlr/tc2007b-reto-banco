@@ -8,6 +8,8 @@
 import SwiftUI
 import Firebase
 
+
+//View Model
 struct FirestoreManager {
     static let db = Firestore.firestore()
 
@@ -37,6 +39,8 @@ struct FirestoreManager {
     }
 }
 
+
+//Model
 struct User: Hashable{
     let id: String
     let firstName: String
