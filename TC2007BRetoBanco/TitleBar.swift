@@ -1,9 +1,8 @@
 //
 //  TitleBar.swift
-
-//  TC2007BRetoBanco
+//  Home
 //
-//  Created by user241186 on 10/6/23.
+//  Created by gdaalumno on 05/10/23.
 //
 
 import SwiftUI
