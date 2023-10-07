@@ -12,43 +12,42 @@ struct listaBeneficiarios: View {
     @State private var deliveries: [Delivery] = []
     
     var body: some View {
-        //NavigationView{
-                List{
-                    Section("Pendientes"){
-                        ForEach(deliveries, id: \.self) { delivery in
-                            NavigationLink(destination: detallesEntrega(delivery: delivery)){
-                                VStack(alignment: .leading, spacing: 6){
-                                    HStack(alignment: .center, spacing: 80){
-                                        Text("Lugar")
-                                            .font(.caption).bold()
-                                            .foregroundColor(.orange)
-                                        Text("Fecha")
-                                            .font(.caption).bold()
-                                            .foregroundColor(.orange)
-                                        Text("Espacios")
-                                            .font(.caption).bold()
-                                            .foregroundColor(.orange)
-                                        
-                                    }
-                                    HStack(alignment: .center, spacing: 40){
-                                        Text("\(delivery.direction)")
-                                            .font(.subheadline)
-                                        Text("\(delivery.date)")
-                                            .font(.subheadline)
-                                        Text("\(delivery.numberPeople)")
-                                            .font(.subheadline)
-                                    }
-                                }
+
+        NavigationStack{
+            List{
+                Section("Pendientes"){
+                    ForEach(deliveries, id: \.self) { delivery in
+                        NavigationLink(destination: detallesEntrega(delivery: delivery)){
+                            LazyVGrid(columns: [
+                                GridItem(.fixed(100)), // Adjust the width as needed
+                                GridItem(.fixed(105)), // Adjust the width as needed
+                                GridItem(.fixed(105))  // Adjust the width as needed
+                            ], alignment: .leading, spacing: 5) {
+                                Text("Lugar")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(.orange)
+                                Text("Fecha")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(.orange)
+                                Text("Espacios")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(.orange)
+                                Text("\(delivery.direction)")
+                                    .font(.subheadline)
+                                Text("\(delivery.date)")
+                                    .font(.subheadline)
+                                Text("\(delivery.numberPeople)")
+                                    .font(.subheadline)
                             }
-                       // }
                     }
                 }
-        .navigationTitle("Tus entregas")
-        .navigationDestination(for: Delivery.self){ delivery in
-            Text("Hola")
-        }
-        .onAppear{
-            FirestoreManager.getEntregas{fetchedDeliveries in self.deliveries = fetchedDeliveries}
+                .navigationTitle("Tus entregas")
+                .onAppear{
+                    FirestoreManager.getEntregas{fetchedDeliveries in self.deliveries = fetchedDeliveries}
+                }
             }
         }
     }
