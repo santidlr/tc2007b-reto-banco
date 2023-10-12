@@ -13,9 +13,13 @@ struct detallesEntrega: View {
     let db = Firestore.firestore()
     let bundleRef: DocumentReference
     
+
     @State private var users: [User] = []
-    @State private var selection = "Red"
-    let colors = ["Red", "Green", "Blue", "Black", "Tartan"]
+    @State private var despensaNames: [String] = [] // Store the names of despensa  despensa
+    @State private var selectedDespensa: [String: String] = [:]
+    @State private var isShowingAlert = false
+    @State private var alertMessage = ""
+    @Environment(\.presentationMode) var presentationMode
     
     init(delivery: Delivery){
         self.delivery = delivery
@@ -39,13 +43,13 @@ struct detallesEntrega: View {
                 Text("Asistencia")
                     .font(.subheadline)
                     .foregroundColor(.black)
-                    .padding(.trailing, 50)
+                    .padding(.trailing, 45)
                 Text("Despensa")
             }
             
             List {
                 ForEach(users, id: \.id) { user in
-                    HStack(alignment: .center, spacing: 10){
+                    HStack(alignment: .center, spacing: 15){
                         HStack(alignment: .center, spacing: 0){
                             Text(user.firstName)
                                 .font(.subheadline)
@@ -56,7 +60,6 @@ struct detallesEntrega: View {
                                 .foregroundColor(.black)
                             Spacer()
                         }
-                        Spacer()
                         VStack{
                             Button(action: {
                                 // Toggle the attendance field for the current user
@@ -71,18 +74,23 @@ struct detallesEntrega: View {
                                     .foregroundColor(user.attendance ? .orange : .black)
                             }
                         }
+                        Spacer()
                         .toggleStyle(.button)
                         .tint(.red)
                         VStack{
-                            Picker("", selection: $selection){
-                                ForEach(colors, id: \.self) {
-                                    Text($0)
-                                        .foregroundColor(.black)
+                            Menu(selectedDespensa[user.id] ?? "Despensa") {
+                                ForEach(despensaNames, id: \.self){ item in
+                                    Button(item){
+                                        selectedDespensa[user.id] = item
+                                        if let index = users.firstIndex(where: { $0.id == user.id }) {
+                                            // Update the user's despensa value
+                                            users[index].despensa = item
+                                            print("Updated despensa for user \(user.firstName) \(user.lastName) (ID: \(user.id)) to: \(item)")
+                                        }
+                                    }
                                 }
                             }
-                            .pickerStyle(.menu)
                         }
-                        Spacer()
                     }
                 }
             }
@@ -96,14 +104,34 @@ struct detallesEntrega: View {
                         .foregroundColor(.black)
                         .cornerRadius(8)
                 }
+                .alert(isPresented: $isShowingAlert){
+                    Alert(
+                        title: Text(alertMessage),
+                        message: nil,
+                        dismissButton: .default(Text("Ok")){
+                            if alertMessage == "Reporte creado con exito"{
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    )
+                }
             }
             .onAppear {
                 fetchUserData()
+                fetchDespensaData()
             }
         }
     }
     
     // MARK: - Fetch Functions
+    
+    private func fetchDespensaData() {
+        FirestoreManager.getDespensa { despensas in
+            DispatchQueue.main.async {
+                self.despensaNames = despensas.map { $0.id }
+            }
+        }
+    }
     
     private func fetchUserData() {
         users.removeAll()
@@ -133,8 +161,10 @@ struct detallesEntrega: View {
                let firstname = data["first"] as? String,
                let lastname = data["last"] as? String,
                let born = data["born"] as? Int,
-               var attendance = data["attendance"] as? Bool{
-                let user = User(id: id, firstName: firstname, lastName: lastname, born: born, attendance: attendance)
+               var attendance = data["attendance"] as? Bool,
+               let despensa = data["despensa"] as? String
+            {
+                let user = User(id: id, firstName: firstname, lastName: lastname, born: born, attendance: attendance, despensa: despensa)
                 
                 attendance = false
                 self.users.append(user)
@@ -157,6 +187,8 @@ struct detallesEntrega: View {
             
             if snapshot?.exists == true {
                 print("A report with the same name already exists. Skipping report creation.")
+                alertMessage = "Este reporte ya existe"
+                isShowingAlert = true
             } else {
                 // Gather the selected data
                 let date = delivery.date
@@ -166,7 +198,8 @@ struct detallesEntrega: View {
                         id: user.id,
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        attendance: user.attendance
+                        attendance: user.attendance,
+                        despensa: user.despensa
                     )
                 }
                 
@@ -181,10 +214,13 @@ struct detallesEntrega: View {
                 // Send the report data to Firestore with the custom reportID
                 db.collection("reportesdeentrega").document(reportID).setData(reportData) { error in
                     if let error = error {
+                        alertMessage = "Fallo al crear reporte"
                         print("Error creating the report: \(error)")
                     } else {
+                        alertMessage = "Reporte creado con exito"
                         print("Report created successfully with ID: \(reportID)")
                     }
+                    isShowingAlert = true
                 }
             }
         }
@@ -196,6 +232,7 @@ struct UserReport {
     let firstName: String
     let lastName: String
     let attendance: Bool
+    let despensa: String
 
     var dictionary: [String: Any] {
         return [
@@ -203,14 +240,7 @@ struct UserReport {
             "firstName": firstName,
             "lastName": lastName,
             "attendance": attendance,
+            "despensa": despensa,
         ]
     }
 }
-
-
-
-
-
-
-
-

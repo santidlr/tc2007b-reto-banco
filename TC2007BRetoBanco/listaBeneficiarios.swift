@@ -44,6 +44,36 @@ struct listaBeneficiarios: View {
                         }
                     }
                 }
+                Section("Completadas"){
+                    ForEach(deliveries, id: \.self) { delivery in
+                        NavigationLink(destination: detallesEntrega(delivery: delivery)){
+                            LazyVGrid(columns: [
+                                GridItem(.fixed(100)), // Adjust the width as needed
+                                GridItem(.fixed(105)), // Adjust the width as needed
+                                GridItem(.fixed(105))  // Adjust the width as needed
+                            ], alignment: .leading, spacing: 5) {
+                                Text("Lugar")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(.orange)
+                                Text("Fecha")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(.orange)
+                                Text("Espacios")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundColor(.orange)
+                                Text("\(delivery.direction)")
+                                    .font(.subheadline)
+                                Text("\(delivery.date)")
+                                    .font(.subheadline)
+                                Text("\(delivery.numberPeople)")
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                }
                 .navigationTitle("Tus entregas")
                 .onAppear{
                     FirestoreManager.getEntregas{fetchedDeliveries in self.deliveries = fetchedDeliveries}
