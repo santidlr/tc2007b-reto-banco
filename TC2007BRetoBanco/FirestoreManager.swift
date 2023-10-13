@@ -22,16 +22,36 @@ struct FirestoreManager {
                 deliveries.removeAll()
                 for document in QuerySnapshot!.documents{
                     let data = document.data()
+                    let id = data["id"] as? String ?? ""
                     let direction = data["direction"] as? String ?? ""
-                    let date = data["date"] as? String ?? ""
+                    let dateStamp = data["date"] as? Timestamp
                     let numberPeople = data["numberPeople"] as? Int ?? 0
                     let relatedUsers = data["relatedUsers"] as? String ?? ""
-        
-                    let delivery = Delivery(direction: direction, date: date, numberPeople: numberPeople, relatedUsers: relatedUsers)
+                    let isCompleted = data["isCompleted"] as? Bool ?? false
+                    let responsibleUsers = data["responsibleUsers"] as? [String] ?? [] // Retrieve responsible users
+                    let date = dateStamp?.dateValue() ?? Date() // Convert timestamp to date
+                    let delivery = Delivery(id: id, direction: direction, date: date, numberPeople: numberPeople, relatedUsers: relatedUsers, isCompleted: isCompleted, responsibleUsers: responsibleUsers)
                     print("Received delivery: \(delivery)")
                     deliveries.append(delivery)
                 }
                 completion(deliveries)
+            }
+        }
+    }
+    static func getDespensa(completion: @escaping ([Despensa]) -> Void) {
+        db.collection("despensa").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents from 'despensa': \(error)")
+                completion([])
+            } else {
+                var despensas = [Despensa]()
+                despensas.removeAll()
+                for document in querySnapshot!.documents {
+                    let despensa = Despensa(id: document.documentID, productos: document.data() as? [String: String] ?? [:])
+                    despensas.append(despensa)
+                }
+                completion(despensas)
+                print("Fetched Despensa data: \(despensas)")
             }
         }
     }
@@ -42,11 +62,21 @@ struct User: Hashable{
     let firstName: String
     let lastName: String
     let born: Int
+    var attendance: Bool
+    var despensa: String
 }
 
 struct Delivery: Hashable{
+    let id: String
     let direction: String
-    let date: String
+    let date: Date
     let numberPeople: Int
     let relatedUsers: String
+    var isCompleted: Bool
+    let responsibleUsers: [String]
+}
+
+struct Despensa: Hashable {
+    let id: String
+    let productos: [String: String]
 }
