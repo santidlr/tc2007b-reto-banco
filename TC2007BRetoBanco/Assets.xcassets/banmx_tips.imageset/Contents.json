@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "estebanheadshot.png",
+      "filename" : "banmx_tips.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "estebanheadshot 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "estebanheadshot 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

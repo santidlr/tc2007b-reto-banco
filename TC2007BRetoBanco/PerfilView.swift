@@ -40,7 +40,7 @@ struct PerfilView: View {
                   .cornerRadius(100)
                 
                 // Icono Dummy
-                Image("person")
+                Image("person_icon")
                     .frame(width: 52, height: 52)
                     .background(.white)
             }
@@ -51,8 +51,7 @@ struct PerfilView: View {
             // Titulo de pagina
             Text("Tu perfil")
                 .font(
-                    Font.custom("Poppins", size: 48)
-                        .weight(.medium)
+                    Font.custom("Poppins-Medium", size: 48)
                 )
                 .foregroundColor(.black)
                 .frame(width: 357, height: 68, alignment: .leading)
@@ -72,7 +71,7 @@ struct PerfilView: View {
                             .foregroundColor(.gray)
                             .disabled(true)
                     }
-                    .font(Font.custom("Poppins", size: 20))
+                    .font(Font.custom("Poppins-Regular", size: 20))
                     .frame(width: 357, height: 26, alignment: .leading)
                     
                     // Linea Nombre
@@ -96,7 +95,7 @@ struct PerfilView: View {
                             .foregroundColor(.gray)
                             .disabled(true)
                     }
-                    .font(Font.custom("Poppins", size: 20))
+                    .font(Font.custom("Poppins-Regular", size: 20))
                     .frame(width: 357, height: 26, alignment: .leading)
                     
                     // Linea Id
@@ -121,7 +120,7 @@ struct PerfilView: View {
                             .foregroundColor(.gray)
                             .disabled(true)
                     }
-                    .font(Font.custom("Poppins", size: 20))
+                    .font(Font.custom("Poppins-Regular", size: 20))
                     .frame(width: 357, height: 26, alignment: .leading)
                     
                     // Linea Horas
@@ -142,7 +141,7 @@ struct PerfilView: View {
                     closeSession = true
                 }, label: {
                     Text("Cerrar Sesión")
-                        .font(Font.custom("Poppins", size: 20))
+                        .font(Font.custom("Poppins-Regular", size: 20))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .frame(width: 267, height: 68, alignment: .center)
