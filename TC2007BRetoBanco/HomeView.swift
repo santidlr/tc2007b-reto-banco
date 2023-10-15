@@ -7,92 +7,90 @@
 
 import SwiftUI
 
-let textos = Color(red: 255 / 255, green: 108 / 255, blue: 90 / 255)
-let formas = Color(red: 255 / 255, green: 108 / 255, blue: 95 / 255)
+let rojo = Color(red: 206 / 255, green: 14 / 255, blue: 45 / 255)
+let naranja = Color(red: 241 / 255, green: 152 / 255, blue: 0 / 255)
 
 struct HomeView: View {
     
-    @State private var username: String = "User_0"
-    @State private var identifier: String = "#12345"
+    @State private var trabajadores : [TrabajadorSocial] = []
+    
+    @State private var username: String = "username"
+    @State private var email: String = "something@banmx.com"
     @State private var serviceHours: String = "0"
     
-    var body: some View {
+    @State private var closeSession : Bool = false
+    
+    var body: some View{
+        if closeSession {
+            Login()
+        }
+        else {
+            content
+        }
+    }
+    
+    var content: some View {
         NavigationStack{
-            ScrollView{
                 VStack{
                     
                     Circle()
-                        .fill(formas)
-                        .frame(width: 150, height: 150)
-                        .padding(.bottom, 30)
+                        .fill(naranja)
+                        .frame(width: 148, height: 148)
+                        .padding(.top, -160)
+                        .padding(.bottom, 50)
                     
-                    Text("Nombre:")
-                        .foregroundColor(textos)
+                    Text("Perfil")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundStyle(Color.black)
                         .padding(.leading, -150)
+                        .padding(.bottom, 25)
                     
-                    TextField("Nombre", text: $username)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 65)
-                        .padding(.bottom, 30)
-                        .disabled(true)
+                    HStack{
+                        Text("Nombre:")
+                            .foregroundStyle(Color.black)
+                        
+                        TextField("Nombre", text: $username)
+                            .foregroundColor(.gray)
+                            .disabled(true)
+                    }
+                    .padding(.leading, 45)
+                    .padding(.bottom, 30)
                     
-                    Text("Identificador:")
-                        .foregroundColor(textos)
-                        .padding(.leading, -150)
+                    HStack{
+                        Text("Identificador:")
+                            .foregroundStyle(Color.black)
+                        
+                        TextField("Indetificador", text: $email)
+                            .foregroundColor(.gray)
+                            .disabled(true)
+                    }
+                    .padding(.leading, 45)
+                    .padding(.bottom, 30)
                     
-                    TextField("Indetificador", text: $identifier)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 65)
-                        .padding(.bottom, 30)
-                        .disabled(true)
-                    
-                    Text("Horas de Servicio:")
-                        .foregroundColor(textos)
-                        .padding(.leading, -150)
-                    
-                    TextField("Horas", text: $serviceHours)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 65)
-                        .padding(.bottom, 30)
-                        .disabled(true)
+                    HStack{
+                        Text("Horas de Servicio:")
+                            .foregroundStyle(Color.black)
+                        
+                        TextField("Horas", text: $serviceHours)
+                            .foregroundColor(.gray)
+                            .disabled(true)
+                    }
+                    .padding(.leading, 45)
+                    .padding(.bottom, 65)
                     
                     Button( action: {
-                        print("Sesión Cerrada")
+                        closeSession = true
                     }, label: {
                         Text("Cerrar Sesión")
                             .foregroundColor(.white)
                     })
-                    .frame(width: 150, height: 70)
-                    .background(formas)
-                    .cornerRadius(12)
+                    .frame(width: 267, height: 68)
+                    .background(rojo)
+                    
                 }
                 .padding(.top, 80)
-                
-                ZStack{
-                    Color.clear
-                    Rectangle()
-                        .fill(Color.white)
-                        .frame(width: 500, height: 50)
-                    
-                    HStack(alignment: .center, spacing: 60){
-                        
-                        Button( action: {
-                            print("Vista de Comunidades")
-                        }, label: {
-                            Text("Comunidad")
-                                .foregroundColor(.gray)
-                        })
-                        
-                        NavigationLink(destination: listaBeneficiarios()){
-                            Text("Lista")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                }
-                .padding(.top, 150)
             }
-            .overlay(TitleBar(title: "Home"))
-        }
     }
 }
 

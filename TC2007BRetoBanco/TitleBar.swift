@@ -24,7 +24,7 @@ struct TitleBar: View {
         }
         .frame(height: 50)
         .frame(maxHeight: .infinity, alignment: .top)
-        .padding(.leading, 50)
+        .padding(.leading)
     }
 }
 
