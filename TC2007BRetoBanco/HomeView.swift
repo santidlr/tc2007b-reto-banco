@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 let textos = Color(red: 255 / 255, green: 108 / 255, blue: 90 / 255)
 let formas = Color(red: 255 / 255, green: 108 / 255, blue: 95 / 255)
@@ -57,6 +58,7 @@ struct HomeView: View {
                         .disabled(true)
                     
                     Button( action: {
+                        logOut()
                         print("Sesión Cerrada")
                     }, label: {
                         Text("Cerrar Sesión")
@@ -99,6 +101,18 @@ struct HomeView: View {
             .overlay(TitleBar(title: "Home"))
         }
     }
+    
+    func logOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+    }
+    
+    
+    
 }
 
 struct HomeView_Previews: PreviewProvider {
