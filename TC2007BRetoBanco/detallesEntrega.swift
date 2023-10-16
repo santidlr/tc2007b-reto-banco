@@ -16,6 +16,7 @@ struct detallesEntrega: View {
 
     @State private var users: [User] = [] //
     @State private var despensaNames: [String] = [] // We store just the names, the parsing can be done in another place
+    @State private var responsibleUsersNames: [String] = []
     @State private var selectedDespensa: [String: String] = [:] // We use it to change the button and add it to the report
     @State private var isShowingAlert = false
     @State private var alertMessage = ""
@@ -131,6 +132,7 @@ struct detallesEntrega: View {
             }
             .onAppear { // We fetch the user data and the despensa data every time the screen is opened.
                 fetchUserData()
+                fetchResponsibleUsersNames()
                 fetchDespensaData()
             }
         }
@@ -201,6 +203,22 @@ struct detallesEntrega: View {
         }
     }
     
+    private func fetchResponsibleUsersNames() {
+        responsibleUsersNames.removeAll()
+        for userID in delivery.responsibleUsers {
+            FirestoreManager.getWorkerByID(workerID: userID) { worker in
+                if let worker = worker {
+                    let name = "\(worker.firstname) \(worker.lastName)"
+                    responsibleUsersNames.append(name)
+                    print("Responsible user fetched succesfully with: \(userID) ")
+                }else{
+                    let name = userID
+                    responsibleUsersNames.append(name)
+                }
+            }
+        }
+    }
+    
     private func crearReporte() { // We grab the attendance status and delivered pantry of each user, as well as some other info and create a report in the DB.
         
         // This ID makes the report easier to find
@@ -236,7 +254,7 @@ struct detallesEntrega: View {
                     "date": date,
                     "direction": direction,
                     "users": userReports.map { $0.dictionary },
-                    "responsibleUsers": delivery.responsibleUsers
+                    "responsibleUsers": responsibleUsersNames
                 ]
                 
                 // Send the report data to Firestore with the custom reportID
