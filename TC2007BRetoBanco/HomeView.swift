@@ -87,6 +87,11 @@ struct HomeView: View {
                             Text("Lista")
                                 .foregroundColor(.gray)
                         }
+                        
+                        NavigationLink(destination: listaReportes()){
+                            Text("Reportes")
+                                .foregroundColor(.gray)
+                        }
                     }
                 }
                 .padding(.top, 150)
