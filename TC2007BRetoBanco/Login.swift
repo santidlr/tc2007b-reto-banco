@@ -117,6 +117,15 @@ struct Login: View {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if error != nil {
                 print(error!.localizedDescription)
+            } else{
+                let db = Firestore.firestore()
+                let ref = db.collection("trabajadores").document(result!.user.uid)
+                ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+                }
+                    
             }
         }
     }
