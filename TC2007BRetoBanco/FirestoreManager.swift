@@ -10,8 +10,8 @@ import Firebase
 
 struct FirestoreManager {
     static let db = Firestore.firestore()
-
-  
+    
+    
     static func getEntregas(completion: @escaping ([Delivery]) -> Void){
         db.collection("deliveries").getDocuments(){(QuerySnapshot, err) in
             if let err = err{
@@ -55,6 +55,68 @@ struct FirestoreManager {
             }
         }
     }
+    static func getWorkerByID(workerID: String, completion: @escaping (Worker?) -> Void) {
+        let workersCollection = db.collection("trabajadores")
+
+        // Use the workerID directly as the document name
+        workersCollection.document(workerID).getDocument { (document, error) in
+            if let error = error {
+                print("Error getting worker from 'trabajadores': \(error)")
+                completion(nil)
+            } else if let document = document, document.exists {
+                if let data = document.data(),
+                   let email = data["email"] as? String,
+                   let firstName = data["firstName"] as? String,
+                   let lastName = data["lastName"] as? String,
+                   let horas = data["horas"] as? Int {
+                    let worker = Worker(id: workerID, email: email, firstname: firstName, lastName: lastName, horas: horas)
+                    completion(worker)
+                } else {
+                    print("Error parsing worker data")
+                    completion(nil)
+                }
+            } else {
+                print("Worker not found in trabajadores collection")
+                completion(nil)
+            }
+        }
+    }
+    static func getReporte(completion: @escaping ([Reporte]) -> Void) {
+        db.collection("reportesdeentrega").getDocuments { (QuerySnapshot, error) in
+            if let error = error{
+                print("Error getting reports from 'reportesdeentrega': \(error)")
+            } else{
+                var reportes = [Reporte]()
+                reportes.removeAll()
+                for document in QuerySnapshot!.documents{
+                    let data = document.data()
+                    let dateStamp = data["date"] as? Timestamp
+                    let direction = data["direction"] as? String ?? ""
+                    let responsibleUsers = data["responsibleUsers"] as? [String] ?? [] // Retrieve responsible users
+                    let date = dateStamp?.dateValue() ?? Date()
+                    
+                    if let usersData = data["users"] as? [[String: Any]] {
+                        var userReportsxd: [UserReport] = []
+                        for userData in usersData {
+                            if let id = userData["id"] as? String,
+                               let firstName = userData["firstName"] as? String,
+                               let lastName = userData["lastName"] as? String,
+                               let attendance = userData["attendance"] as? Bool,
+                               let despensa = userData["despensa"] as? String {
+                                
+                                let userReport = UserReport(id: id, firstName: firstName, lastName: lastName, attendance: attendance, despensa: despensa)
+                                userReportsxd.append(userReport)
+                            }
+                        }
+                        let report = Reporte(id: document.documentID, date: date, direction: direction, userReports: userReportsxd, responsibleUsers: responsibleUsers)
+                        reportes.append(report)
+                        print("Fetched report: \(reportes)")
+                    }
+                }
+                completion(reportes)
+            }
+        }
+    }
     static func getInfoTrabajadorS(completion: @escaping ([TrabajadorSocial]) -> Void){
         db.collection("trabajadores").getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -77,7 +139,6 @@ struct FirestoreManager {
             }
         }
     }
-    
 }
 
 struct User: Hashable{
@@ -109,3 +170,20 @@ struct TrabajadorSocial: Hashable{
     let email: String
     let serviceHours: String
 }
+
+struct Reporte: Identifiable {
+    let id: String
+    let date: Date
+    let direction: String
+    let userReports: [UserReport]
+    let responsibleUsers: [String]
+}
+
+struct Worker: Hashable {
+    let id: String
+    let email: String
+    let firstname: String
+    let lastName: String
+    let horas: Int
+}
+

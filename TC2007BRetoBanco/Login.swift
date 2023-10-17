@@ -84,7 +84,7 @@ struct Login: View {
                 .offset(y: 110)
                 
                 Button {
-                    // login
+                    login()
                 } label: {
                     Text("Already have an account? Log in")
                         .bold()
