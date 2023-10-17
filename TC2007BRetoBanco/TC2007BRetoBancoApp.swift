@@ -13,7 +13,7 @@ struct TC2007BRetoBancoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            Login()
+            LoginEdited()
         }
     }
 }

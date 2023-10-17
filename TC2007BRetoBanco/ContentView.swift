@@ -9,8 +9,10 @@ import SwiftUI
 
 
 struct ContentView: View {
+    var id = ""
+    
     var body: some View {
-        MenuView()
+        MenuView(id: id)
     }
 }
 

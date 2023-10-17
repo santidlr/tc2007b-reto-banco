@@ -6,22 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
 
-let rojo = Color(red: 206 / 255, green: 14 / 255, blue: 45 / 255)
-let naranja = Color(red: 241 / 255, green: 152 / 255, blue: 0 / 255)
 
 struct PerfilView: View {
+    var id = ""
     
     @State private var trabajadores : [TrabajadorSocial] = []
     
-    @State private var username: String = "username"
+    @State private var username : String = "username"
     @State private var email: String = "something@banmx.com"
     @State private var serviceHours: String = "0"
-    
-    @State private var loginView : Bool = false
-    @State private var menuView : Bool = false
-
-
     
     var body: some View {
         NavigationView{
@@ -134,7 +129,8 @@ struct PerfilView: View {
                     // Cerrar sesion
                     ZStack{
                         Button( action: {
-                            loginView = true
+                            logOut()
+                            //loginView = true
                         }, label: {
                             Text("Cerrar Sesión")
                                 .font(Font.custom("Poppins-Regular", size: 20))
@@ -144,7 +140,7 @@ struct PerfilView: View {
                         })
                         .foregroundColor(.clear)
                         .frame(width: 267, height: 68)
-                        .background(rojo)
+                        .background(Color(red: 0.81, green: 0.05, blue: 0.18))
                         .cornerRadius(5)
                     }
                     .frame(width: 267, height: 68)
@@ -152,10 +148,29 @@ struct PerfilView: View {
                     Spacer()
                         .frame(height: 50)
                 }
+                .onAppear {
+                    FirestoreManager.getInfoTrabajadorS { fetchedTrabajadores in
+                        DispatchQueue.main.async {
+                            self.trabajadores = fetchedTrabajadores
+                            if let user = fetchedTrabajadores.first(where: { $0.id == id }) {
+                                self.username = user.username + " " + user.lastName
+                                self.email = user.email
+                            }
+                        }
+                    }
+                }
             }
         }
         
     }
+    func logOut() {
+          let firebaseAuth = Auth.auth()
+          do {
+            try firebaseAuth.signOut()
+          } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+          }
+      }
 }
 
 

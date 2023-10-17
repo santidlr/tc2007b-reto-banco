@@ -127,11 +127,13 @@ struct FirestoreManager {
                 trabajadores.removeAll()
                 for document in querySnapshot!.documents{
                     let data = document.data()
+                    let id = data["userID"] as? String ?? ""
                     let name = data["firstName"] as? String ?? ""
+                    let lastName = data["lastName"] as? String ?? ""
                     let email = data["email"] as? String ?? ""
                     let hours = data["horas"] as? String ?? ""
                     
-                    let trabajador = TrabajadorSocial(username: name, email: email, serviceHours: hours)
+                    let trabajador = TrabajadorSocial(id: id, username: name, lastName: lastName, email: email, serviceHours: hours)
                     trabajadores.append(trabajador)
                     print("Fetched trabajador data: \(trabajador)")
                 }
@@ -165,8 +167,10 @@ struct Despensa: Hashable {
     let productos: [String: String]
 }
 
-struct TrabajadorSocial: Hashable{
+struct TrabajadorSocial: Identifiable{
+    let id: String
     let username: String
+    let lastName: String
     let email: String
     let serviceHours: String
 }

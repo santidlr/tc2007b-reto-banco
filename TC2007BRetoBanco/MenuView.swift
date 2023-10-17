@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MenuView: View {
+    var id = ""
     
-    @State private var userName : String = "Yahir"
+    @State private var trabajadores : [TrabajadorSocial] = []
+    
+    @State private var userName : String = "username"
         
     var body: some View {
         NavigationStack{
@@ -23,7 +27,7 @@ struct MenuView: View {
                     // Usuario Icon
                     ZStack{                        
                         NavigationLink {
-                            PerfilView()
+                            PerfilView(id: id)
                         } label: {
                             Rectangle()
                                 .foregroundColor(.clear)
@@ -179,7 +183,16 @@ struct MenuView: View {
                         
                     }
                     .frame(width: 440, height: 159)
-                    
+                    .onAppear {
+                        FirestoreManager.getInfoTrabajadorS { fetchedTrabajadores in
+                            DispatchQueue.main.async {
+                                self.trabajadores = fetchedTrabajadores
+                                if let user = fetchedTrabajadores.first(where: { $0.id == id }) {
+                                    self.userName = user.username
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
