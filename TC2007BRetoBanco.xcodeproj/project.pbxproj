@@ -42,8 +42,10 @@
 		530447942ACD420400768F50 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 530447932ACD420400768F50 /* FirebaseRemoteConfigSwift */; };
 		530447962ACD420400768F50 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 530447952ACD420400768F50 /* FirebaseStorage */; };
 		530447982ACD420400768F50 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 530447972ACD420400768F50 /* FirebaseStorageCombine-Community */; };
+		5359E96E2ADE41F00081D063 /* aceptarEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5359E96D2ADE41F00081D063 /* aceptarEntrega.swift */; };
 		53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */; };
 		53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */; };
+		53BAEC712ADDE7370043CC96 /* elegirEntrega.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BAEC702ADDE7370043CC96 /* elegirEntrega.swift */; };
 		53E918762ADCA73900CE1C46 /* listaReportes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E918752ADCA73900CE1C46 /* listaReportes.swift */; };
 		53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */; };
 		53F7D8002AD114A40050F4C6 /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F7D7FF2AD114A40050F4C6 /* TitleBar.swift */; };
@@ -80,8 +82,10 @@
 		297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITests.swift; sourceTree = "<group>"; };
 		297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		29CB5EF52ACFE19600A59638 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5359E96D2ADE41F00081D063 /* aceptarEntrega.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aceptarEntrega.swift; sourceTree = "<group>"; };
 		53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detallesEntrega.swift; sourceTree = "<group>"; };
 		53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		53BAEC702ADDE7370043CC96 /* elegirEntrega.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elegirEntrega.swift; sourceTree = "<group>"; };
 		53E918752ADCA73900CE1C46 /* listaReportes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listaReportes.swift; sourceTree = "<group>"; };
 		53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listaBeneficiarios.swift; sourceTree = "<group>"; };
 		53F7D7FF2AD114A40050F4C6 /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBar.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				53F23B882AC9058B0089E8AA /* listaBeneficiarios.swift */,
+				53BAEC702ADDE7370043CC96 /* elegirEntrega.swift */,
+				5359E96D2ADE41F00081D063 /* aceptarEntrega.swift */,
 				53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */,
 				53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */,
 				297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */,
@@ -373,7 +379,9 @@
 				53E918762ADCA73900CE1C46 /* listaReportes.swift in Sources */,
 				53F23B892AC9058B0089E8AA /* listaBeneficiarios.swift in Sources */,
 				53AC25112ACE6FC9001E7B3D /* FirestoreManager.swift in Sources */,
+				5359E96E2ADE41F00081D063 /* aceptarEntrega.swift in Sources */,
 				53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */,
+				53BAEC712ADDE7370043CC96 /* elegirEntrega.swift in Sources */,
 				297A7AC72AC67C510014F0C4 /* ContentView.swift in Sources */,
 				297A7AC52AC67C510014F0C4 /* TC2007BRetoBancoApp.swift in Sources */,
 				53F7D8042AD1171D0050F4C6 /* Login.swift in Sources */,
