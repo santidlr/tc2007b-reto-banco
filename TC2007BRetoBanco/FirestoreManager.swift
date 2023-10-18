@@ -117,6 +117,30 @@ struct FirestoreManager {
             }
         }
     }
+    static func getInfoTrabajadorS(completion: @escaping ([TrabajadorSocial]) -> Void){
+        db.collection("trabajadores").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting document from 'trabajadores': \(error)")
+                completion([])
+            } else{
+                var trabajadores = [TrabajadorSocial]()
+                trabajadores.removeAll()
+                for document in querySnapshot!.documents{
+                    let data = document.data()
+                    let id = data["userID"] as? String ?? ""
+                    let name = data["firstName"] as? String ?? ""
+                    let lastName = data["lastName"] as? String ?? ""
+                    let email = data["email"] as? String ?? ""
+                    let hours = data["horas"] as? String ?? ""
+                    
+                    let trabajador = TrabajadorSocial(id: id, username: name, lastName: lastName, email: email, serviceHours: hours)
+                    trabajadores.append(trabajador)
+                    print("Fetched trabajador data: \(trabajador)")
+                }
+                completion(trabajadores)
+            }
+        }
+    }
 }
 
 struct User: Hashable{
@@ -141,6 +165,14 @@ struct Delivery: Hashable{
 struct Despensa: Hashable {
     let id: String
     let productos: [String: String]
+}
+
+struct TrabajadorSocial: Identifiable{
+    let id: String
+    let username: String
+    let lastName: String
+    let email: String
+    let serviceHours: String
 }
 
 struct Reporte: Identifiable {
