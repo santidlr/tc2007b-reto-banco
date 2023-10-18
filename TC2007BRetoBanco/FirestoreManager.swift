@@ -169,7 +169,7 @@ struct FirestoreManager {
                 trabajadores.removeAll()
                 for document in querySnapshot!.documents{
                     let data = document.data()
-                    let id = data["userID"] as? String ?? ""
+                    let id = data["id"] as? String ?? ""
                     let name = data["firstName"] as? String ?? ""
                     let lastName = data["lastName"] as? String ?? ""
                     let email = data["email"] as? String ?? ""
