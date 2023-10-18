@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct LoginEdited: View {
+    @State private var identificador = ""
     
     @State private var email = ""
     @State private var password = ""
@@ -18,6 +19,7 @@ struct LoginEdited: View {
     var body: some View {
         if userIsLoggedIn {
             ContentView(id: "LLv54ljgkQWH1qVtsp0RvsF3O6i1")
+
         } else {
             content
         }

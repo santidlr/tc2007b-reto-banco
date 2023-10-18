@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct MenuView: View {
-    var id = ""
+    @State var id = ""
     
     @State private var trabajadores : [TrabajadorSocial] = []
     
@@ -52,8 +52,8 @@ struct MenuView: View {
                             .foregroundColor(.black)
                             .frame(width: 357, height: 50, alignment: .leading)
                         
-                        
-                        TextField("nombre", text: $userName)
+//                        TextField("nombre", text: $userName)
+                        TextField("nombre", text: $id)
                             .font(Font.custom("Poppins-Medium", size: 48))
                             .foregroundColor(.black)
                             .disabled(true)
@@ -190,9 +190,16 @@ struct MenuView: View {
                                 self.trabajadores = fetchedTrabajadores
                                 if let user = fetchedTrabajadores.first(where: { $0.id == id }) {
                                     self.userName = user.username
+                                    print("id: \(id)")
                                 }
+                                
                             }
                         }
+//                        FirestoreManager.getWorkerByID(workerID: id) { worker in
+//                            if let user = worker {
+//                                self.userName = user.firstname + " " + user.lastName
+//                            }
+//                        }
                     }
                 }
             }
