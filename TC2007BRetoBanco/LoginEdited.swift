@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct LoginEdited: View {
+    @State private var identificador = ""
     
     @State private var email = ""
     @State private var password = ""
@@ -17,7 +18,7 @@ struct LoginEdited: View {
     
     var body: some View {
         if userIsLoggedIn {
-            ContentView(id: "LAUugL9aU8XrAcpGVAEDhjD451q1")
+            ContentView(id: "CSwgG8iEWhcI2xP6NC23")
         } else {
             content
         }
@@ -177,19 +178,10 @@ struct LoginEdited: View {
         }
         
         .onAppear {
-            Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                if error != nil {
-                    print(error!.localizedDescription)
-                } else{
-                   let db = Firestore.firestore()
-                   let ref = db.collection("trabajadores").document(result!.user.uid)
-                   ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
-                       if let error = error{
-                           print(error.localizedDescription)
-                       }
-                   }
-
-               }
+            Auth.auth().addStateDidChangeListener { auth, user in
+                if user != nil{
+                    userIsLoggedIn.toggle()
+                }
             }
         }
     }
@@ -209,7 +201,9 @@ struct LoginEdited: View {
             } else{
                 let db = Firestore.firestore()
                 let ref = db.collection("trabajadores").document(result!.user.uid)
-                ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
+                ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio", "isAdmin": false]) { error in
+                    identificador = result!.user.uid
+                    print(identificador)
                     if let error = error{
                         print(error.localizedDescription)
                     }
