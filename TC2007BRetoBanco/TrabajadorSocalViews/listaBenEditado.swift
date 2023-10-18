@@ -12,17 +12,17 @@ struct listaBenEditado: View {
     @State private var deliveries: [Delivery] = []
     
     var confirmedDeliveries: [Delivery] {
-       deliveries.filter{$0.isConfirmed}
-   }
-
-   // We filter deliveries in completed and not completed
-   var completedDeliveries: [Delivery] {
-       confirmedDeliveries.filter{$0.isCompleted}
-   }
-
-   var pendingDeliveries: [Delivery] {
-       confirmedDeliveries.filter{!$0.isCompleted}
-   }
+           deliveries.filter{$0.isConfirmed}
+       }
+       
+    // We filter deliveries in completed and not completed
+    var completedDeliveries: [Delivery] {
+        confirmedDeliveries.filter{$0.isCompleted}
+    }
+       
+    var pendingDeliveries: [Delivery] {
+        confirmedDeliveries.filter {!$0.isCompleted}
+    }
     
     var body: some View{
         NavigationStack{
