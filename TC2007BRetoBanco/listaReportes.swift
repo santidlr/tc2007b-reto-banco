@@ -48,7 +48,7 @@ struct listaReportes: View {
                             NavigationLink("Detalles"){
                                 VStack{
                                     Text("Detalles de Reporte")
-                                        .font(.largeTitle)
+                                        .font(.largeTitle).bold()
                                         .padding(.bottom)
                                 }
                                 VStack{
@@ -73,7 +73,7 @@ struct listaReportes: View {
     }
     func usersString(from userReports: [UserReport]) -> String {
         return userReports.map { user in
-            "\(user.firstName) \(user.lastName)\nID: \(user.id)\nAttendance: \(user.attendance ? "Presente" : "Faltante")\nDespensa: \(user.despensa)"
+            "\(user.firstName) \(user.lastName)\nID: \(user.id)\nAsistencia: \(user.attendance ? "Presente" : "Faltante")\nDespensa: \(user.despensa)"
         }.joined(separator: "\n\n")
     }
 }

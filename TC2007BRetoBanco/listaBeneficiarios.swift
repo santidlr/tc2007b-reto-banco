@@ -11,13 +11,17 @@ import SwiftUI
 struct listaBeneficiarios: View {
     @State private var deliveries: [Delivery] = []
     
+    var confirmedDeliveries: [Delivery] {
+        deliveries.filter{$0.isConfirmed}
+    }
+    
     // We filter deliveries in completed and not completed
     var completedDeliveries: [Delivery] {
-        deliveries.filter{$0.isCompleted}
+        confirmedDeliveries.filter{$0.isCompleted}
     }
     
     var pendingDeliveries: [Delivery] {
-        deliveries.filter {!$0.isCompleted}
+        confirmedDeliveries.filter {!$0.isCompleted}
     }
     
     var body: some View {
@@ -55,7 +59,6 @@ struct listaBeneficiarios: View {
                 }
                 Section("Completadas"){ // Completed should not be accessible, just remove NavLink
                     ForEach(completedDeliveries, id: \.self) { delivery in
-                        NavigationLink(destination: detallesEntrega(delivery: delivery)){
                             LazyVGrid(columns: [
                                 GridItem(.fixed(100)), // Why no lay properly??
                                 GridItem(.fixed(105)),
@@ -80,7 +83,6 @@ struct listaBeneficiarios: View {
                                 Text("\(delivery.numberPeople)")
                                     .font(.subheadline)
                             }
-                        }
                     }
                 }
                 .navigationTitle("Tus entregas")
