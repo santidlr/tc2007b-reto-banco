@@ -18,7 +18,7 @@ struct LoginEdited: View {
     
     var body: some View {
         if userIsLoggedIn {
-            ContentView(id: "LLv54ljgkQWH1qVtsp0RvsF3O6i1")
+            ContentView(id: identificador)
 
         } else {
             content
@@ -181,6 +181,7 @@ struct LoginEdited: View {
             Auth.auth().addStateDidChangeListener { auth, user in
                 if user != nil{
                     userIsLoggedIn.toggle()
+                    identificador = user!.uid
                 }
             }
         }
