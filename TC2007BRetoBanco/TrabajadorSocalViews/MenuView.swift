@@ -52,8 +52,7 @@ struct MenuView: View {
                             .foregroundColor(.black)
                             .frame(width: 357, height: 50, alignment: .leading)
                         
-//                        TextField("nombre", text: $userName)
-                        TextField("nombre", text: $id)
+                        TextField("nombre", text: $userName)
                             .font(Font.custom("Poppins-Medium", size: 48))
                             .foregroundColor(.black)
                             .disabled(true)
