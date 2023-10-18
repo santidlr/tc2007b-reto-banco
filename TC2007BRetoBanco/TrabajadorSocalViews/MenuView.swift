@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct MenuView: View {
-    var id = ""
+    @State var id = ""
     
     @State private var trabajadores : [TrabajadorSocial] = []
     
@@ -52,7 +52,6 @@ struct MenuView: View {
                             .foregroundColor(.black)
                             .frame(width: 357, height: 50, alignment: .leading)
                         
-                        
                         TextField("nombre", text: $userName)
                             .font(Font.custom("Poppins-Medium", size: 48))
                             .foregroundColor(.black)
@@ -84,15 +83,16 @@ struct MenuView: View {
                         .frame(width: 440, height: 160)
                         
                         
-                        // Cambiar button por navigationLink
-                        Button(action: {
-                            print("Comunidad _")
-                        }) {
-                            Text("Comunidad _")
-                                .font(.custom("Poppins-Medium", size: 20))
-                                .foregroundColor(.white)
-                                .frame(width: 330, height: 70, alignment: .topLeading)
-                        }
+                        
+                         NavigationLink{
+                             ElegirEntregaEdited()
+                         } label: {
+                             Text("Beneficiarios _")
+                                 .font(.custom("Poppins-Medium", size: 20))
+                                 .foregroundColor(.white)
+                                 .frame(width: 330, height: 70, alignment: .topLeading)
+                         }
+                         
                     }
                     .frame(width: 440, height: 160)
                     .padding(.bottom, -10)
@@ -189,14 +189,20 @@ struct MenuView: View {
                                 self.trabajadores = fetchedTrabajadores
                                 if let user = fetchedTrabajadores.first(where: { $0.id == id }) {
                                     self.userName = user.username
+                                    print("id: \(id)")
                                 }
+                                
                             }
                         }
+//                        FirestoreManager.getWorkerByID(workerID: id) { worker in
+//                            if let user = worker {
+//                                self.userName = user.firstname + " " + user.lastName
+//                            }
+//                        }
                     }
                 }
             }
         }
-        
     }
 }
 

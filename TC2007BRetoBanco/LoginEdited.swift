@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct LoginEdited: View {
+    @State private var identificador = ""
     
     @State private var email = ""
     @State private var password = ""
@@ -18,7 +19,8 @@ struct LoginEdited: View {
     
     var body: some View {
         if userIsLoggedIn {
-            ContentView(id: "LAUugL9aU8XrAcpGVAEDhjD451q1")
+            ContentView(id: identificador)
+
         } else {
             content
         }
@@ -130,8 +132,8 @@ struct LoginEdited: View {
                     
                     // Register
                     Button {
-                        print("Registro")
-                        register()
+                        print("Login")
+                        login()
                     } label: {
                         ZStack{
                             Rectangle()
@@ -140,7 +142,7 @@ struct LoginEdited: View {
                                 .background(Color(red: 0.96, green: 0.96, blue: 0.96))
                                 .cornerRadius(5)
                             
-                            Text("Registrate")
+                            Text("Iniciar sesión")
                                 .font(Font.custom("Poppins-Regular", size: 20))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
@@ -151,17 +153,17 @@ struct LoginEdited: View {
                     
                     // Login
                     Button {
-                        print("Login")
-                        login()
+                        print("Registro")
+                        register()
                     } label: {
                         HStack(spacing: -1){
-                            Text("¿Ya tienes una cuenta?")
+                            Text("¿No tienes una cuenta?")
                                 .font(Font.custom("Poppins-Regular", size: 15))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.white)
                                 .frame(width: 180,height: 20, alignment: .center)
                             
-                            Text("Inicia sesión")
+                            Text("Registrarse")
                                 .font(Font.custom("Poppins-Regular", size: 15))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.white)
@@ -175,11 +177,11 @@ struct LoginEdited: View {
                 .padding(.top, -40)
             }
         }
-        
         .onAppear {
             Auth.auth().addStateDidChangeListener { auth, user in
                 if user != nil{
                     userIsLoggedIn.toggle()
+                    identificador = user!.uid
                 }
             }
         }
@@ -188,7 +190,9 @@ struct LoginEdited: View {
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil{
+                userIsLoggedIn.toggle()
                 print(error!.localizedDescription)
+                
             }
         }
     }
@@ -201,6 +205,7 @@ struct LoginEdited: View {
                 let db = Firestore.firestore()
                 let ref = db.collection("trabajadores").document(result!.user.uid)
                 ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
+                    userIsLoggedIn.toggle()
                     if let error = error{
                         print(error.localizedDescription)
                     }else{

@@ -11,13 +11,17 @@ struct listaBenEditado: View {
         
     @State private var deliveries: [Delivery] = []
     
+    var confirmedDeliveries: [Delivery] {
+           deliveries.filter{$0.isConfirmed}
+       }
+       
     // We filter deliveries in completed and not completed
     var completedDeliveries: [Delivery] {
-        deliveries.filter{$0.isCompleted}
+        confirmedDeliveries.filter{$0.isCompleted}
     }
-    
+       
     var pendingDeliveries: [Delivery] {
-        deliveries.filter {!$0.isCompleted}
+        confirmedDeliveries.filter {!$0.isCompleted}
     }
     
     var body: some View{
@@ -63,18 +67,18 @@ struct listaBenEditado: View {
                                 ], alignment: .leading, spacing: 5) {
                                     
                                     Text("Lugar")
-                                        .font(Font.custom("PoppinsMedium", size: 15))
+                                        .font(Font.custom("Poppins-Medium", size: 15))
                                         .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
                                         .frame(width: 98, height: 26, alignment: .leading)
                                     
                                     Text("Fecha")
-                                        .font(Font.custom("PoppinsMedium", size: 15))
+                                        .font(Font.custom("Poppins-Medium", size: 15))
                                         .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
                                         .frame(width: 98, height: 26, alignment: .leading)
                                         .foregroundColor(.orange)
                                     
                                     Text("Beneficiados")
-                                        .font(Font.custom("PoppinsMedium", size: 15))
+                                        .font(Font.custom("Poppins-Medium", size: 15))
                                         .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
                                         .frame(width: 98, height: 26, alignment: .leading)
                                     
@@ -97,12 +101,10 @@ struct listaBenEditado: View {
                         }
                     }
                     .font(Font.custom("Poppins-Regular", size: 20))
-                    .foregroundColor(.black)
-                    .frame(width: 357, alignment: .leading)
+                    .frame(alignment: .leading)
                     
                     Section("Completadas"){ // Completed should not be accessible, just remove NavLink
                         ForEach(completedDeliveries, id: \.self) { delivery in
-                            NavigationLink(destination: detallesEntrega(delivery: delivery)){
                                 LazyVGrid(columns: [
                                     GridItem(.fixed(100)), // Why no lay properly??
                                     GridItem(.fixed(105)),
@@ -110,17 +112,17 @@ struct listaBenEditado: View {
                                 ], alignment: .leading, spacing: 5) {
                                     
                                     Text("Lugar")
-                                        .font(Font.custom("PoppinsMedium", size: 15))
+                                        .font(Font.custom("Poppins-Medium", size: 15))
                                         .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
                                         .frame(width: 98, height: 26, alignment: .leading)
                                     
                                     Text("Fecha")
-                                        .font(Font.custom("PoppinsMedium", size: 15))
+                                        .font(Font.custom("Poppins-Medium", size: 15))
                                         .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
                                         .frame(width: 98, height: 26, alignment: .leading)
                                     
                                     Text("Beneficiados")
-                                        .font(Font.custom("PoppinsMedium", size: 15))
+                                        .font(Font.custom("Poppins-Medium", size: 15))
                                         .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
                                         .frame(width: 98, height: 26, alignment: .leading)
                                     
@@ -144,16 +146,14 @@ struct listaBenEditado: View {
                     }
                     .font(Font.custom("Poppins-Regular", size: 20))
                     .foregroundColor(.black)
-                    .frame(width: 357, alignment: .leading)
+                    .frame(alignment: .leading)
                     .navigationTitle("")
                     .onAppear{
                         FirestoreManager.getEntregas{fetchedDeliveries in self.deliveries = fetchedDeliveries}
                     }
-                }
-                
             }
+            .background(Color(red: 0.96, green: 0.96, blue: 0.96))
         }
-        .background(Color(red: 0.96, green: 0.96, blue: 0.96))
     }
     
     // We format date to spanish and to the desired length
