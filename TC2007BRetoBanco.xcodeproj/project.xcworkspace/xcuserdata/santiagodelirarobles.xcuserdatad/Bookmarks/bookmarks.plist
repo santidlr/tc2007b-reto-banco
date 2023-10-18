@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>123</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>122</string>
+					<key>Timestamp</key>
+					<string>719213989.155218</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>TC2007BRetoBanco/Login.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+<<<<<<< HEAD
+				<string>    
+</string>
+				<key>leading</key>
+				<string>        }
+    }
+</string>
+				<key>trailing</key>
+				<string>    
+}
+    
+=======
+				<string>                ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
+</string>
+				<key>leading</key>
+				<string>                let db = Firestore.firestore()
+                let ref = db.collection("trabajadores").document(result!.user.uid)
+</string>
+				<key>trailing</key>
+				<string>                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+>>>>>>> adaea6e706ce42fddc13fdfcd647b048caf3574c
+</string>
+			</dict>
+			<key>title</key>
+			<string>firstName, lastName van a venir de otras textfields en otra vista espeífica para registro</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>

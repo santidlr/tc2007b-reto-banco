@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import Firebase
 
 struct Login: View {
@@ -86,7 +84,7 @@ struct Login: View {
                 .offset(y: 110)
                 
                 Button {
-                    // login
+                    login()
                 } label: {
                     Text("Already have an account? Log in")
                         .bold()
@@ -97,10 +95,19 @@ struct Login: View {
             }
             .frame(width: 350)
             .onAppear {
-                Auth.auth().addStateDidChangeListener { auth, user in
-                    if user != nil{
-                        userIsLoggedIn.toggle()
-                    }
+                Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                    if error != nil {
+                                   print(error!.localizedDescription)
+                               } else{
+                                   let db = Firestore.firestore()
+                                   let ref = db.collection("trabajadores").document(result!.user.uid)
+                                   ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
+                                       if let error = error{
+                                           print(error.localizedDescription)
+                                       }
+                                   }
+
+                               }
                 }
             }
         }
@@ -119,6 +126,15 @@ struct Login: View {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if error != nil {
                 print(error!.localizedDescription)
+            } else{
+                let db = Firestore.firestore()
+                let ref = db.collection("trabajadores").document(result!.user.uid)
+                ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+                }
+                    
             }
         }
     }
