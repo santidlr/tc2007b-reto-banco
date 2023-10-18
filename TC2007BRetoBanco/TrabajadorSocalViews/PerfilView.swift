@@ -29,7 +29,6 @@ struct PerfilView: View {
                 content
             }
         }
-        //.navigationBarBackButtonHidden(true)
     }
     
     
