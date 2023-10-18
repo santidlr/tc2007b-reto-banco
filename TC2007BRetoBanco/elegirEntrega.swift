@@ -79,6 +79,7 @@ struct elegirEntrega: View {
                 }
                 .navigationTitle("Aplicar a entrega")
                 .onAppear{
+                        self.availableDeliveries = []
                         FirestoreManager.getEntregas{fetchedDeliveries in self.availableDeliveries = fetchedDeliveries}
                 }
             }

@@ -13,6 +13,7 @@ struct LoginEdited: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
+
     
     
     var body: some View {
@@ -57,7 +58,7 @@ struct LoginEdited: View {
                     .padding(.bottom, 30)
             }
             
-        
+            
             // Spacer
             Spacer()
                 .frame(height: 10)
@@ -67,36 +68,35 @@ struct LoginEdited: View {
                 
                 // Rectangulo
                 Rectangle()
-                  .foregroundColor(.clear)
-                  .frame(width: 445, height: 539)
-                 .background(
-                    LinearGradient(
-                      stops: [
-                        Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 0.00),
-                        Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 1.00),
-                      ],
-                      startPoint: UnitPoint(x: 0.5, y: 0),
-                      endPoint: UnitPoint(x: 0.5, y: 1)
+                    .foregroundColor(.clear)
+                    .frame(width: 445, height: 539)
+                    .background(
+                        LinearGradient(
+                            stops: [
+                                Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 0.00),
+                                Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 1.00),
+                            ],
+                            startPoint: UnitPoint(x: 0.5, y: 0),
+                            endPoint: UnitPoint(x: 0.5, y: 1)
+                        )
                     )
-                  )
                 
                 // Text field y botones
                 VStack{
-                    
                     VStack{
                         // Email
                         TextField("Email", text: $email, prompt: Text("Email")
                             .foregroundColor(.white).bold())
-                            .foregroundColor(.white)
-                            .font(Font.custom("Popins-Regular", size: 20))
-                            .textFieldStyle(.automatic)
-                            .padding(.leading, 45)
+                        .foregroundColor(.white)
+                        .font(Font.custom("Popins-Regular", size: 20))
+                        .textFieldStyle(.automatic)
+                        .padding(.leading, 45)
                         
                         // Linea Email
                         Rectangle()
-                          .foregroundColor(.clear)
-                          .frame(width: 357, height: 1)
-                          .background(Color(red: 0.67, green: 0.67, blue: 0.67))
+                            .foregroundColor(.clear)
+                            .frame(width: 357, height: 1)
+                            .background(Color(red: 0.67, green: 0.67, blue: 0.67))
                         
                     }
                     .frame(alignment: .leading)
@@ -110,16 +110,16 @@ struct LoginEdited: View {
                         // Password
                         SecureField("Password", text: $password, prompt: Text("Password")
                             .foregroundColor(.white).bold())
-                            .foregroundColor(.white)
-                            .font(Font.custom("Popins-Regular", size: 20))
-                            .textFieldStyle(.automatic)
-                            .padding(.leading, 45)
+                        .foregroundColor(.white)
+                        .font(Font.custom("Popins-Regular", size: 20))
+                        .textFieldStyle(.automatic)
+                        .padding(.leading, 45)
                         
                         // Linea password
                         Rectangle()
-                          .foregroundColor(.clear)
-                          .frame(width: 357, height: 1)
-                          .background(Color(red: 0.67, green: 0.67, blue: 0.67))
+                            .foregroundColor(.clear)
+                            .frame(width: 357, height: 1)
+                            .background(Color(red: 0.67, green: 0.67, blue: 0.67))
                         
                     }
                     .frame(alignment: .leading)
@@ -135,10 +135,10 @@ struct LoginEdited: View {
                     } label: {
                         ZStack{
                             Rectangle()
-                              .foregroundColor(.clear)
-                              .frame(width: 267, height: 68)
-                              .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-                              .cornerRadius(5)
+                                .foregroundColor(.clear)
+                                .frame(width: 267, height: 68)
+                                .background(Color(red: 0.96, green: 0.96, blue: 0.96))
+                                .cornerRadius(5)
                             
                             Text("Registrate")
                                 .font(Font.custom("Poppins-Regular", size: 20))
@@ -177,19 +177,10 @@ struct LoginEdited: View {
         }
         
         .onAppear {
-            Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                if error != nil {
-                    print(error!.localizedDescription)
-                } else{
-                   let db = Firestore.firestore()
-                   let ref = db.collection("trabajadores").document(result!.user.uid)
-                   ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
-                       if let error = error{
-                           print(error.localizedDescription)
-                       }
-                   }
-
-               }
+            Auth.auth().addStateDidChangeListener { auth, user in
+                if user != nil{
+                    userIsLoggedIn.toggle()
+                }
             }
         }
     }
@@ -212,9 +203,10 @@ struct LoginEdited: View {
                 ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio"]) { error in
                     if let error = error{
                         print(error.localizedDescription)
+                    }else{
+                        print("Registration successful")
                     }
                 }
-                    
             }
         }
     }

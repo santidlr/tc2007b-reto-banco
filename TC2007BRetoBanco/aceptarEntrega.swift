@@ -85,6 +85,7 @@ struct aceptarEntrega: View {
             }
             .navigationTitle("Aceptar solicitudes")
             .onAppear {
+                self.deliveries = []
                 FirestoreManager.getEntregas { fetchedDeliveries in
                     self.deliveries = fetchedDeliveries
                 }
