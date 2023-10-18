@@ -175,7 +175,6 @@ struct LoginEdited: View {
                 .padding(.top, -40)
             }
         }
-        
         .onAppear {
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 if error != nil {
@@ -188,7 +187,6 @@ struct LoginEdited: View {
                            print(error.localizedDescription)
                        }
                    }
-
                }
             }
         }

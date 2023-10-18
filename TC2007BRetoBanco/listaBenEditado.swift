@@ -11,14 +11,18 @@ struct listaBenEditado: View {
         
     @State private var deliveries: [Delivery] = []
     
-    // We filter deliveries in completed and not completed
-    var completedDeliveries: [Delivery] {
-        deliveries.filter{$0.isCompleted}
-    }
-    
-    var pendingDeliveries: [Delivery] {
-        deliveries.filter {!$0.isCompleted}
-    }
+    var confirmedDeliveries: [Delivery] {
+           deliveries.filter{$0.isConfirmed}
+       }
+
+       // We filter deliveries in completed and not completed
+       var completedDeliveries: [Delivery] {
+           confirmedDeliveries.filter{$0.isCompleted}
+       }
+
+       var pendingDeliveries: [Delivery] {
+           confirmedDeliveries.filter {!$0.isCompleted}
+       }
     
     var body: some View{
         NavigationStack{
@@ -102,7 +106,6 @@ struct listaBenEditado: View {
                     
                     Section("Completadas"){ // Completed should not be accessible, just remove NavLink
                         ForEach(completedDeliveries, id: \.self) { delivery in
-                            NavigationLink(destination: detallesEntrega(delivery: delivery)){
                                 LazyVGrid(columns: [
                                     GridItem(.fixed(100)), // Why no lay properly??
                                     GridItem(.fixed(105)),
@@ -150,8 +153,6 @@ struct listaBenEditado: View {
                         FirestoreManager.getEntregas{fetchedDeliveries in self.deliveries = fetchedDeliveries}
                     }
                 }
-                
-            }
         }
         .background(Color(red: 0.96, green: 0.96, blue: 0.96))
     }
