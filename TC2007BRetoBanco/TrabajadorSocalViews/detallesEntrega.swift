@@ -30,44 +30,53 @@ struct detallesEntrega: View {
     
     var body: some View {
         VStack {
+            // titulo y header
             Text("Crear Entrega")
-                .font(.largeTitle)
-                .padding(.bottom)
+                .font(Font.custom("Poppins-Medium", size: 48))
+                .foregroundColor(.black)
+                .frame(width: 357, height: 68, alignment: .leading)
+                .padding(.bottom, 30)
             
-            Text(delivery.direction)
-                .font(.body)
-                .foregroundColor(.blue)
+            Text("Comunidad: \(delivery.direction)")
+                .font(Font.custom("Poppins-Light", size: 20))
+                .foregroundColor(.black)
+                .frame(width: 357, height: 25, alignment: .leading)
             
-            Text(delivery.id)
-                .font(.body)
-                .foregroundColor(.blue)
-                .padding(.bottom)
+            Text("Id: \(delivery.id)")
+                .font(Font.custom("Poppins-Light", size: 20))
+                .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
+                .frame(width: 357, height: 25, alignment: .leading)
+                .padding(.bottom, 30)
+            
 
             HStack {
                 Text("Nombre")
-                    .font(.subheadline)
-                    .foregroundColor(.red)
-                    .padding(.trailing, 50)
+                    .font(Font.custom("Poppins-Medium", size: 15))
+                    .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
+                    .frame(width: 98, height: 26, alignment: .leading)
+                
                 Text("Asistencia")
-                    .font(.subheadline)
-                    .foregroundColor(.red)
-                    .padding(.trailing, 45)
+                    .font(Font.custom("Poppins-Medium", size: 15))
+                    .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
+                    .frame(width: 98, height: 26, alignment: .leading)
+                
                 Text("Despensa")
-                    .font(.subheadline)
-                    .foregroundColor(.red)
+                    .font(Font.custom("Poppins-Medium", size: 15))
+                    .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0))
+                    .frame(width: 98, height: 26, alignment: .leading)
             }
+            .offset(y: 20)
+            
             
             List {
                 ForEach(users, id: \.id) { user in
                     HStack(alignment: .center, spacing: 15){
                         HStack(alignment: .center, spacing: 0){
-                            Text(user.firstName)
-                                .font(.subheadline)
+                            Text(user.firstName + " " + user.lastName)
+                                .font(Font.custom("Poppins-Regular", size: 15))
                                 .foregroundColor(.black)
-                            + Text(" ")
-                            + Text(user.lastName)
-                                .font(.subheadline)
-                                .foregroundColor(.black)
+                                .frame(width: 98, height: 26, alignment: .leading)
+                            
                             Spacer()
                         }
                         VStack{
@@ -79,9 +88,10 @@ struct detallesEntrega: View {
                                 }
                             }) {
                                 Text(user.attendance ? "Presente" : "Faltante")
-                                    .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
-                                    .background(Color.gray.opacity(0.2))
-                                    .foregroundColor(user.attendance ? .orange : .black)
+                                    .frame(width: 100, height: 40, alignment: .center)
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(8)
+                                    .foregroundColor(user.attendance ? .black : .black)
                             }
                         }
                         Spacer()
@@ -100,9 +110,9 @@ struct detallesEntrega: View {
                                     }
                                 }
                             }
-                            .background(Color.gray.opacity(0.2))
-                            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-                            .foregroundColor(.orange)
+                            .frame(width: 100, height: 40)
+                            .background(Color.gray.opacity(0.1))
+                            .foregroundColor(.black)
                             .cornerRadius(8)
                         }
                     }
@@ -113,11 +123,15 @@ struct detallesEntrega: View {
             HStack{ // This button calls crearReporte which will save every value changed withing the users and create a delivery report
                 Button(action:{crearReporte()}){
                     Text("Confirmar Entrega")
-                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.black)
-                        .cornerRadius(8)
+                        .font(Font.custom("Poppins-Regular", size: 15))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .frame(width: 267, height: 68, alignment: .center)
                 }
+                .foregroundColor(.clear)
+                .frame(width: 200, height: 70, alignment: .center)
+                .background(Color(red: 0.81, green: 0.05, blue: 0.18))
+                .cornerRadius(8)
                 .alert(isPresented: $isShowingAlert){ // Alert to notify the user the report creation success or failure.
                     Alert(
                         title: Text(alertMessage),
@@ -130,12 +144,16 @@ struct detallesEntrega: View {
                         }
                     )
                 }
+                
+                
             }
             .onAppear { // We fetch the user data and the despensa data every time the screen is opened.
                 fetchUserData()
                 fetchResponsibleUsersNames()
                 fetchDespensaData()
             }
+            Spacer()
+                .frame(height: 50)
         }
     }
     

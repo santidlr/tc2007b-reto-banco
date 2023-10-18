@@ -195,7 +195,6 @@
 				8B8DBA092ADF8F270076CE29 /* Old Views */,
 				FBFF974B2ADFCE7C00A1922A /* AdminViews */,
 				FBFF97462ADFBE5700A1922A /* TrabajadorSocalViews */,
-				53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */,
 				53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */,
 				8B4CCE8F2ADED1E60086E9F0 /* LoginEdited.swift */,
 				297A7AC62AC67C510014F0C4 /* ContentView.swift */,
@@ -259,6 +258,7 @@
 		FBFF97462ADFBE5700A1922A /* TrabajadorSocalViews */ = {
 			isa = PBXGroup;
 			children = (
+				53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */,
 				8B6F27B32ADDAFC3004A3F37 /* listaBenEditado.swift */,
 				FBFF97472ADFC26D00A1922A /* ElegirEntregaEdited.swift */,
 				8BDF5D902ADC7506007F8139 /* PerfilView.swift */,
