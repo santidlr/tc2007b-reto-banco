@@ -26,11 +26,14 @@ struct FirestoreManager {
                     let direction = data["direction"] as? String ?? ""
                     let dateStamp = data["date"] as? Timestamp
                     let numberPeople = data["numberPeople"] as? Int ?? 0
+                    let spots = data["spots"] as? Int ?? 0
                     let relatedUsers = data["relatedUsers"] as? String ?? ""
                     let isCompleted = data["isCompleted"] as? Bool ?? false
+                    let isConfirmed = data["isConfirmed"] as? Bool ?? false
+                    let pendingUsers = data["pendingUsers"] as? [String] ?? []
                     let responsibleUsers = data["responsibleUsers"] as? [String] ?? [] // Retrieve responsible users
                     let date = dateStamp?.dateValue() ?? Date() // Convert timestamp to date
-                    let delivery = Delivery(id: id, direction: direction, date: date, numberPeople: numberPeople, relatedUsers: relatedUsers, isCompleted: isCompleted, responsibleUsers: responsibleUsers)
+                    let delivery = Delivery(id: id, direction: direction, date: date, numberPeople: numberPeople, spots: spots, relatedUsers: relatedUsers, isCompleted: isCompleted, isConfirmed: isConfirmed, pendingUsers: pendingUsers, responsibleUsers: responsibleUsers)
                     print("Received delivery: \(delivery)")
                     deliveries.append(delivery)
                 }
@@ -52,6 +55,45 @@ struct FirestoreManager {
                 }
                 completion(despensas)
                 print("Fetched Despensa data: \(despensas)")
+            }
+        }
+    }
+    static func updatePendingUsers(for delivery: Delivery, with newPendingUsers: [String], completion: @escaping (Bool) -> Void) {
+        let deliveriesCollection = db.collection("deliveries")
+        let deliveryDocument = deliveriesCollection.document(delivery.id)
+        
+        // Update the "pendingUsers" field with the new value
+        deliveryDocument.updateData(["pendingUsers": newPendingUsers]) { error in
+            if let error = error {
+                print("Error updating pendingUsers for delivery: \(error.localizedDescription)")
+                completion(false) // Update failed
+            } else {
+                completion(true) // Update successful
+            }
+        }
+    }
+    static func updateResponsibleUsers(for delivery: Delivery, with newResponsibleUsers: [String], completion: @escaping (Bool) -> Void) {
+        let deliveriesCollection = db.collection("deliveries")
+        let deliveryDocument = deliveriesCollection.document(delivery.id)
+        
+        // Update the "responsibleUsers" field with the new value
+        deliveryDocument.updateData(["responsibleUsers": newResponsibleUsers]) { error in
+            if let error = error {
+                print("Error updating responsibleUsers for delivery: \(error.localizedDescription)")
+                completion(false) // Update failed
+            } else {
+                // Remove the same elements from pendingUsers
+                let updatedPendingUsers = delivery.pendingUsers.filter { !newResponsibleUsers.contains($0) }
+                
+                // Update the "pendingUsers" field with the updated value
+                deliveryDocument.updateData(["pendingUsers": updatedPendingUsers]) { error in
+                    if let error = error {
+                        print("Error updating pendingUsers for delivery: \(error.localizedDescription)")
+                        completion(false) // Update failed
+                    } else {
+                        completion(true) // Update successful
+                    }
+                }
             }
         }
     }
@@ -157,9 +199,12 @@ struct Delivery: Hashable{
     let direction: String
     let date: Date
     let numberPeople: Int
+    let spots: Int
     let relatedUsers: String
     var isCompleted: Bool
-    let responsibleUsers: [String]
+    var isConfirmed: Bool
+    var pendingUsers: [String]
+    var responsibleUsers: [String]
 }
 
 struct Despensa: Hashable {
