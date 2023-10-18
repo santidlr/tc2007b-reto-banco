@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct detallesEntrega: View {
+    
     let delivery: Delivery // All of this code happens "inside a single instance of delivery"
     let db = Firestore.firestore() // Configuring Firestore that we need
     let bundleRef: DocumentReference // Calling the users bundle where we get all the users related to the delivery

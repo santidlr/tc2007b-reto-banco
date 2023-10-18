@@ -84,15 +84,16 @@ struct MenuView: View {
                         .frame(width: 440, height: 160)
                         
                         
-                        // Cambiar button por navigationLink
-                        Button(action: {
-                            print("Comunidad _")
-                        }) {
-                            Text("Comunidad _")
-                                .font(.custom("Poppins-Medium", size: 20))
-                                .foregroundColor(.white)
-                                .frame(width: 330, height: 70, alignment: .topLeading)
-                        }
+                        
+                         NavigationLink{
+                             ElegirEntregaEdited()
+                         } label: {
+                             Text("Beneficiarios _")
+                                 .font(.custom("Poppins-Medium", size: 20))
+                                 .foregroundColor(.white)
+                                 .frame(width: 330, height: 70, alignment: .topLeading)
+                         }
+                         
                     }
                     .frame(width: 440, height: 160)
                     .padding(.bottom, -10)
@@ -203,7 +204,6 @@ struct MenuView: View {
                 }
             }
         }
-        
     }
 }
 

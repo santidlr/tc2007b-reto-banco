@@ -18,7 +18,21 @@ struct PerfilView: View {
     @State private var email: String = "something@banmx.com"
     @State private var serviceHours: String = "0"
     
-    var body: some View {
+    @State private var isNotLogin : Bool = false
+    
+    var body : some View{
+        NavigationStack{
+            if isNotLogin{
+                LoginEdited()
+            }
+            else{
+                content
+            }
+        }
+    }
+    
+    
+    var content: some View {
         NavigationView{
             ScrollView{
                 VStack{
@@ -130,7 +144,7 @@ struct PerfilView: View {
                     ZStack{
                         Button( action: {
                             logOut()
-                            //loginView = true
+                            isNotLogin.toggle()
                         }, label: {
                             Text("Cerrar Sesión")
                                 .font(Font.custom("Poppins-Regular", size: 20))
