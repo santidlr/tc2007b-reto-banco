@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct LoginEdited: View {
+    
     @State private var identificador = ""
     
     @State private var trabajadores : [TrabajadorSocial] = []
@@ -186,6 +187,7 @@ struct LoginEdited: View {
                 .padding(.top, -40)
             }
         }
+        .navigationBarBackButtonHidden(false)
         .onAppear {
             Auth.auth().addStateDidChangeListener { auth, user in
                 if user != nil{
