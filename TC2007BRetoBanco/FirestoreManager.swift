@@ -174,8 +174,9 @@ struct FirestoreManager {
                     let lastName = data["lastName"] as? String ?? ""
                     let email = data["email"] as? String ?? ""
                     let hours = data["horas"] as? String ?? ""
+                    let isAdmin = data["isAdmin"] as? Bool ?? false
                     
-                    let trabajador = TrabajadorSocial(id: id, username: name, lastName: lastName, email: email, serviceHours: hours)
+                    let trabajador = TrabajadorSocial(id: id, username: name, lastName: lastName, email: email, serviceHours: hours, isAdmin: isAdmin)
                     trabajadores.append(trabajador)
                     print("Fetched trabajador data: \(trabajador)")
                 }
@@ -218,6 +219,7 @@ struct TrabajadorSocial: Identifiable{
     let lastName: String
     let email: String
     let serviceHours: String
+    let isAdmin: Bool
 }
 
 struct Reporte: Identifiable {
