@@ -200,17 +200,17 @@ struct Registro: View {
                 .padding(.top, -40)
             }
         }
-        .onAppear {
-            Auth.auth().addStateDidChangeListener { auth, user in
-                if user != nil{
-                    identificador = user!.uid
-                    withAnimation(.easeInOut(duration: 0.8)){
-                        userIsLoggedIn.toggle()
-                    }
-                    
-                }
-            }
-        }
+//        .onAppear {
+//            Auth.auth().addStateDidChangeListener { auth, user in
+//                if user != nil{
+//                    identificador = user!.uid
+//                    withAnimation(.easeInOut(duration: 0.8)){
+//                        userIsLoggedIn = true
+//                    }
+//                    
+//                }
+//            }
+//        }
     }
     
     func register() {
@@ -223,7 +223,7 @@ struct Registro: View {
                 ref.setData(["email": result!.user.email!, "firstName": firstName, "horas": 0, "id": result!.user.uid, "lastName": lastName, "isAdmin": false]) { error in
                     identificador = result!.user.uid
                     withAnimation(.easeInOut(duration: 0.8)){
-                        userIsLoggedIn.toggle()
+                        userIsLoggedIn = true
                     }
                     if let error = error{
                         print(error.localizedDescription)

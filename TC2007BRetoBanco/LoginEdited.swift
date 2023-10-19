@@ -213,7 +213,7 @@ struct LoginEdited: View {
                             }
                         }
                         withAnimation(.easeInOut(duration: 0.8)){
-                            userIsLoggedIn.toggle()
+                            userIsLoggedIn = true
                         }
                     }
                 }
@@ -224,15 +224,15 @@ struct LoginEdited: View {
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil{
+                print(error!.localizedDescription)
+            }
+            else{
                 FirestoreManager.getWorkerByID(workerID: result!.user.uid){ worker in
                     userIsAdmin = worker!.isAdmin
                 }
-                if let error = error{
-                    print(error.localizedDescription)
-                }
                 identificador = result!.user.uid
                 withAnimation(.easeInOut(duration: 0.8)){
-                    userIsLoggedIn.toggle()
+                    userIsLoggedIn = true
                 }
             }
         }
@@ -248,7 +248,7 @@ struct LoginEdited: View {
                 ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio", "isAdmin": false]) { error in
                     identificador = result!.user.uid
                     withAnimation(.easeInOut(duration: 0.8)){
-                        userIsLoggedIn.toggle()
+                        userIsLoggedIn = true
                     }
                     if let error = error{
                         print(error.localizedDescription)
