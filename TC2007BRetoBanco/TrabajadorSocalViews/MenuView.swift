@@ -87,7 +87,7 @@ struct MenuView: View {
                          NavigationLink{
                              ElegirEntregaEdited()
                          } label: {
-                             Text("Beneficiarios _")
+                             Text("Comunidad _")
                                  .font(.custom("Poppins-Medium", size: 20))
                                  .foregroundColor(.white)
                                  .frame(width: 330, height: 70, alignment: .topLeading)

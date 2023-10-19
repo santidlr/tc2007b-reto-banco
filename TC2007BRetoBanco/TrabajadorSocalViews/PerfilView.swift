@@ -22,7 +22,8 @@ struct PerfilView: View {
     @AppStorage("userIsAdmin") var userIsAdmin = false
     
     @State private var isNotLogin : Bool = false
-    
+    @State private var hide : Bool = false
+
     var body : some View{
         NavigationStack{
             if isNotLogin{
@@ -32,8 +33,8 @@ struct PerfilView: View {
                 content
             }
         }
+        .navigationBarBackButtonHidden(hide)
     }
-    
     
     var content: some View {
         NavigationView{
@@ -147,6 +148,7 @@ struct PerfilView: View {
                     ZStack{
                         Button( action: {
                             logOut()
+                            hide.toggle()
                             isNotLogin.toggle()
                             userIsLoggedIn = false
                             userIsAdmin = false
