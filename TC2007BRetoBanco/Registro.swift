@@ -204,7 +204,7 @@ struct Registro: View {
             Auth.auth().addStateDidChangeListener { auth, user in
                 if user != nil{
                     identificador = user!.uid
-                    withAnimation(.smooth(duration: 0.8)){
+                    withAnimation(.easeInOut(duration: 0.8)){
                         userIsLoggedIn.toggle()
                     }
                     
@@ -222,7 +222,7 @@ struct Registro: View {
                 let ref = db.collection("trabajadores").document(result!.user.uid)
                 ref.setData(["email": result!.user.email!, "firstName": firstName, "horas": 0, "id": result!.user.uid, "lastName": lastName, "isAdmin": false]) { error in
                     identificador = result!.user.uid
-                    withAnimation(.smooth(duration: 0.8)){
+                    withAnimation(.easeInOut(duration: 0.8)){
                         userIsLoggedIn.toggle()
                     }
                     if let error = error{

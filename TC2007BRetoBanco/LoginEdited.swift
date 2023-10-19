@@ -210,7 +210,7 @@ struct LoginEdited: View {
                                 
                             }
                         }
-                        withAnimation(.smooth(duration: 0.8)){
+                        withAnimation(.easeInOut(duration: 0.8)){
                             userIsLoggedIn.toggle()
                         }
                     }
@@ -229,7 +229,7 @@ struct LoginEdited: View {
                     print(error.localizedDescription)
                 }
                 identificador = result!.user.uid
-                withAnimation(.smooth(duration: 0.8)){
+                withAnimation(.easeInOut(duration: 0.8)){
                     userIsLoggedIn.toggle()
                 }
             }
@@ -245,7 +245,7 @@ struct LoginEdited: View {
                 let ref = db.collection("trabajadores").document(result!.user.uid)
                 ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio", "isAdmin": false]) { error in
                     identificador = result!.user.uid
-                    withAnimation(.smooth(duration: 0.8)){
+                    withAnimation(.easeInOut(duration: 0.8)){
                         userIsLoggedIn.toggle()
                     }
                     if let error = error{
