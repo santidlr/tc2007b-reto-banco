@@ -110,8 +110,9 @@ struct FirestoreManager {
                    let email = data["email"] as? String,
                    let firstName = data["firstName"] as? String,
                    let lastName = data["lastName"] as? String,
-                   let horas = data["horas"] as? Int {
-                    let worker = Worker(id: workerID, email: email, firstname: firstName, lastName: lastName, horas: horas)
+                   let horas = data["horas"] as? Int,
+                   let isAdmin = data["isAdmin"] as? Bool{
+                    let worker = Worker(id: workerID, email: email, firstname: firstName, lastName: lastName, horas: horas, isAdmin: isAdmin)
                     completion(worker)
                 } else {
                     print("Error parsing worker data")
@@ -236,5 +237,6 @@ struct Worker: Hashable {
     let firstname: String
     let lastName: String
     let horas: Int
+    let isAdmin: Bool
 }
 

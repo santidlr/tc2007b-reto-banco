@@ -15,16 +15,17 @@ struct Registro: View {
     @State private var password = ""
     @State private var firstName = ""
     @State private var lastName = ""
-    @State private var userIsLoggedIn = false
-    @State private var userIsAdmin = false
+    @AppStorage("userIsLoggedIn") var userIsLoggedIn = false
+    @AppStorage("userIsAdmin") var userIsAdmin = false
     
     
     var body: some View {
-        if userIsLoggedIn {
+        if userIsLoggedIn && !userIsAdmin{
             ContentView(id: identificador)
-
+                .transition(.push(from: .trailing))
         } else if userIsLoggedIn && userIsAdmin {
             MenuAdminView(id: identificador)
+                .transition(.push(from: .trailing))
 
         } else {
             content
@@ -202,8 +203,11 @@ struct Registro: View {
         .onAppear {
             Auth.auth().addStateDidChangeListener { auth, user in
                 if user != nil{
-                    userIsLoggedIn.toggle()
                     identificador = user!.uid
+                    withAnimation(.smooth(duration: 0.8)){
+                        userIsLoggedIn.toggle()
+                    }
+                    
                 }
             }
         }
@@ -217,7 +221,10 @@ struct Registro: View {
                 let db = Firestore.firestore()
                 let ref = db.collection("trabajadores").document(result!.user.uid)
                 ref.setData(["email": result!.user.email!, "firstName": firstName, "horas": 0, "id": result!.user.uid, "lastName": lastName, "isAdmin": false]) { error in
-                    userIsLoggedIn.toggle()
+                    identificador = result!.user.uid
+                    withAnimation(.smooth(duration: 0.8)){
+                        userIsLoggedIn.toggle()
+                    }
                     if let error = error{
                         print(error.localizedDescription)
                     }

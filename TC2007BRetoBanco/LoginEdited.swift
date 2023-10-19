@@ -11,21 +11,33 @@ import Firebase
 struct LoginEdited: View {
     @State private var identificador = ""
     
+    
     @State private var trabajadores : [TrabajadorSocial] = []
     @State private var userName : String = "username"
     
     @State private var email = ""
     @State private var password = ""
-    @State private var userIsLoggedIn = false
-    @State private var userIsAdmin = false
+//    @State private var userIsLoggedIn = false
+//    @State private var userIsAdmin = false
+    @AppStorage("userIsLoggedIn") var userIsLoggedIn = false
+    @AppStorage("userIsAdmin") var userIsAdmin = false
+//    @AppStorage("worker") var worker: Worker = [id: String,
+//    email: String,
+//    firstname: String,
+//    lastName: String,
+//    horas: Int]
+    
+    @State private var showRegistro = false
     
     
     var body: some View {
         if userIsLoggedIn && !userIsAdmin {
             ContentView(id: identificador)
+                .transition(.push(from: .trailing))
 
         } else if userIsLoggedIn && userIsAdmin {
             MenuAdminView(id: identificador)
+                .transition(.push(from: .trailing))
 
         } else {
             content
@@ -33,187 +45,193 @@ struct LoginEdited: View {
     }
     
     var content: some View {
-        VStack{
-            
-            Spacer()
-                .frame(height: 50)
-            
-            // Banco Image
-            Image("banmx_logo")
-                .resizable()
-                .renderingMode(.original)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 111, height: 70)
-                .padding(.leading, 200)
-            
-            Spacer()
-                .frame(height: 50)
-            
+        NavigationStack {
             VStack{
-                // Titulo de pagina
-                Text("Hola,")
-                    .font(Font.custom("Poppins-Regular", size: 48))
-                    .foregroundColor(.black)
-                    .frame(width: 357, height: 68, alignment: .leading)
-                    .padding(.bottom, 30)
                 
-                Text("Bienvenido")
-                    .font(
-                        Font.custom("Poppins-Medium", size: 48)
-                    )
-                    .foregroundColor(.black)
-                    .frame(width: 357, height: 68, alignment: .leading)
-                    .padding(.bottom, 30)
-            }
-            
-        
-            // Spacer
-            Spacer()
-                .frame(height: 10)
-            
-            // Cuadro Rojo
-            ZStack{
+                Spacer()
+                    .frame(height: 50)
                 
-                // Rectangulo
-                Rectangle()
-                  .foregroundColor(.clear)
-                  .frame(width: 445, height: 539)
-                 .background(
-                    LinearGradient(
-                      stops: [
-                        Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 0.00),
-                        Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 1.00),
-                      ],
-                      startPoint: UnitPoint(x: 0.5, y: 0),
-                      endPoint: UnitPoint(x: 0.5, y: 1)
-                    )
-                  )
+                // Banco Image
+                Image("banmx_logo")
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 111, height: 70)
+                    .padding(.leading, 200)
                 
-                // Text field y botones
+                Spacer()
+                    .frame(height: 50)
+                
                 VStack{
+                    // Titulo de pagina
+                    Text("Hola,")
+                        .font(Font.custom("Poppins-Regular", size: 48))
+                        .foregroundColor(.black)
+                        .frame(width: 357, height: 68, alignment: .leading)
+                        .padding(.bottom, 30)
                     
+                    Text("Bienvenido")
+                        .font(
+                            Font.custom("Poppins-Medium", size: 48)
+                        )
+                        .foregroundColor(.black)
+                        .frame(width: 357, height: 68, alignment: .leading)
+                        .padding(.bottom, 30)
+                }
+                
+            
+                // Spacer
+                Spacer()
+                    .frame(height: 10)
+                
+                // Cuadro Rojo
+                ZStack{
+                    
+                    // Rectangulo
+                    Rectangle()
+                      .foregroundColor(.clear)
+                      .frame(width: 445, height: 539)
+                     .background(
+                        LinearGradient(
+                          stops: [
+                            Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 0.00),
+                            Gradient.Stop(color: Color(red: 0.81, green: 0.05, blue: 0.18), location: 1.00),
+                          ],
+                          startPoint: UnitPoint(x: 0.5, y: 0),
+                          endPoint: UnitPoint(x: 0.5, y: 1)
+                        )
+                      )
+                    
+                    // Text field y botones
                     VStack{
-                        // Email
-                        TextField("Email", text: $email, prompt: Text("Email")
-                            .foregroundColor(.white).bold())
-                            .foregroundColor(.white)
-                            .font(Font.custom("Poppins-Regular", size: 20))
-                            .textFieldStyle(.automatic)
-                            .padding(.leading, 45)
                         
-                        // Linea Email
-                        Rectangle()
-                          .foregroundColor(.clear)
-                          .frame(width: 357, height: 1)
-                          .background(Color(red: 0.67, green: 0.67, blue: 0.67))
-                        
-                    }
-                    .frame(alignment: .leading)
-                    
-                    // Spacer entre email y password
-                    Spacer()
-                        .frame(height: 50)
-                    
-                    VStack{
-                        
-                        // Password
-                        SecureField("Password", text: $password, prompt: Text("Password")
-                            .foregroundColor(.white).bold())
-                            .foregroundColor(.white)
-                            .font(Font.custom("Poppins-Regular", size: 20))
-                            .textFieldStyle(.automatic)
-                            .padding(.leading, 45)
-                        
-                        // Linea password
-                        Rectangle()
-                          .foregroundColor(.clear)
-                          .frame(width: 357, height: 1)
-                          .background(Color(red: 0.67, green: 0.67, blue: 0.67))
-                        
-                    }
-                    .frame(alignment: .leading)
-                    
-                    
-                    Spacer()
-                        .frame(height: 80)
-                    
-                    // Login
-                    Button {
-                        print("Login")
-                        login()
-                    } label: {
-                        ZStack{
+                        VStack{
+                            // Email
+                            TextField("Email", text: $email, prompt: Text("Email")
+                                .foregroundColor(.white).bold())
+                                .foregroundColor(.white)
+                                .font(Font.custom("Poppins-Regular", size: 20))
+                                .textFieldStyle(.automatic)
+                                .padding(.leading, 45)
+                            
+                            // Linea Email
                             Rectangle()
                               .foregroundColor(.clear)
-                              .frame(width: 267, height: 68)
-                              .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-                              .cornerRadius(5)
+                              .frame(width: 357, height: 1)
+                              .background(Color(red: 0.67, green: 0.67, blue: 0.67))
                             
-                            Text("Iniciar sesión")
-                                .font(Font.custom("Poppins-Regular", size: 20))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.black)
-                                .frame(width: 267, height: 68, alignment: .center)
                         }
-                        .frame(width: 267, height: 68)
-                    }
-                    
-                    // Registro
-                    Button {
-                        print("Registro")
-                        //usar navigation algo para show registro
-//                        Registro()
-                        register()
-                    } label: {
-                        HStack(spacing: -1){
-                            Text("¿No tienes una cuenta?")
-                                .font(Font.custom("Poppins-Regular", size: 15))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.white)
-                                .frame(width: 180,height: 20, alignment: .center)
+                        .frame(alignment: .leading)
+                        
+                        // Spacer entre email y password
+                        Spacer()
+                            .frame(height: 50)
+                        
+                        VStack{
                             
-                            Text("Registrarse")
-                                .font(Font.custom("Poppins-Regular", size: 15))
-                                .multilineTextAlignment(.center)
+                            // Password
+                            SecureField("Password", text: $password, prompt: Text("Password")
+                                .foregroundColor(.white).bold())
                                 .foregroundColor(.white)
-                                .underline()
-                                .frame(width: 100, height: 50, alignment: .center)
+                                .font(Font.custom("Poppins-Regular", size: 20))
+                                .textFieldStyle(.automatic)
+                                .padding(.leading, 45)
                             
+                            // Linea password
+                            Rectangle()
+                              .foregroundColor(.clear)
+                              .frame(width: 357, height: 1)
+                              .background(Color(red: 0.67, green: 0.67, blue: 0.67))
+                            
+                        }
+                        .frame(alignment: .leading)
+                        
+                        
+                        Spacer()
+                            .frame(height: 80)
+                        
+                        // Login
+                        Button {
+                            print("Login")
+                            login()
+                        } label: {
+                            ZStack{
+                                Rectangle()
+                                  .foregroundColor(.clear)
+                                  .frame(width: 267, height: 68)
+                                  .background(Color(red: 0.96, green: 0.96, blue: 0.96))
+                                  .cornerRadius(5)
+                                
+                                Text("Iniciar sesión")
+                                    .font(Font.custom("Poppins-Regular", size: 20))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.black)
+                                    .frame(width: 267, height: 68, alignment: .center)
+                            }
+                            .frame(width: 267, height: 68)
                         }
                         
-                    }
-                }
-                .padding(.top, -40)
-            }
-        }
-        .onAppear {
-            Auth.auth().addStateDidChangeListener { auth, user in
-                if user != nil{
-                    userIsLoggedIn.toggle()
-                    identificador = user!.uid
-//                    let trabajador: Worker = FirestoreManager.getWorkerByID(workerID: identificador, completion: )
-                    FirestoreManager.getInfoTrabajadorS { fetchedTrabajadores in
-                        DispatchQueue.main.async {
-                            self.trabajadores = fetchedTrabajadores
-                            if let user = fetchedTrabajadores.first(where: { $0.id == identificador }) {
-                                self.userIsAdmin = user.isAdmin
-                                print("id: \(identificador)")
+                        // Registro
+                        
+                        NavigationLink{
+                            Registro()
+                        } label: {
+                            HStack(spacing: -1){
+                                Text("¿No tienes una cuenta?")
+                                    .font(Font.custom("Poppins-Regular", size: 15))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                                    .frame(width: 180,height: 20, alignment: .center)
+                                
+                                Text("Registrarse")
+                                    .font(Font.custom("Poppins-Regular", size: 15))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                                    .underline()
+                                    .frame(width: 100, height: 50, alignment: .center)
                             }
-                            
                         }
                     }
-                    
+                    .padding(.top, -40)
                 }
             }
+            .onAppear {
+                Auth.auth().addStateDidChangeListener { auth, user in
+                    if user != nil{
+                        identificador = user!.uid
+    //                    let trabajador: Worker = FirestoreManager.getWorkerByID(workerID: identificador, completion: )
+                        FirestoreManager.getInfoTrabajadorS { fetchedTrabajadores in
+                            DispatchQueue.main.async {
+                                self.trabajadores = fetchedTrabajadores
+                                if let user = fetchedTrabajadores.first(where: { $0.id == identificador }) {
+                                    self.userIsAdmin = user.isAdmin
+                                    print("id: \(identificador)")
+                                }
+                                
+                            }
+                        }
+                        withAnimation(.smooth(duration: 0.8)){
+                            userIsLoggedIn.toggle()
+                        }
+                    }
+                }
+        }
         }
     }
     
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil{
-                userIsLoggedIn.toggle()
-                print(error!.localizedDescription)
-                
+                FirestoreManager.getWorkerByID(workerID: result!.user.uid){ worker in
+                    userIsAdmin = worker!.isAdmin
+                }
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+                identificador = result!.user.uid
+                withAnimation(.smooth(duration: 0.8)){
+                    userIsLoggedIn.toggle()
+                }
             }
         }
     }
@@ -226,7 +244,10 @@ struct LoginEdited: View {
                 let db = Firestore.firestore()
                 let ref = db.collection("trabajadores").document(result!.user.uid)
                 ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio", "isAdmin": false]) { error in
-                    userIsLoggedIn.toggle()
+                    identificador = result!.user.uid
+                    withAnimation(.smooth(duration: 0.8)){
+                        userIsLoggedIn.toggle()
+                    }
                     if let error = error{
                         print(error.localizedDescription)
                     }
@@ -241,3 +262,11 @@ struct LoginEdited_Previews: PreviewProvider {
         LoginEdited()
     }
 }
+
+//struct Worker: Hashable {
+//    let id: String
+//    let email: String
+//    let firstname: String
+//    let lastName: String
+//    let horas: Int
+//}
