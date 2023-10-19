@@ -18,6 +18,9 @@ struct PerfilView: View {
     @State private var email: String = "something@banmx.com"
     @State private var serviceHours: String = "0"
     
+    @AppStorage("userIsLoggedIn") var userIsLoggedIn = false
+    @AppStorage("userIsAdmin") var userIsAdmin = false
+    
     @State private var isNotLogin : Bool = false
     @State private var hide : Bool = false
 
@@ -147,6 +150,8 @@ struct PerfilView: View {
                             logOut()
                             hide.toggle()
                             isNotLogin.toggle()
+                            userIsLoggedIn = false
+                            userIsAdmin = false
                         }, label: {
                             Text("Cerrar Sesión")
                                 .font(Font.custom("Poppins-Regular", size: 20))
