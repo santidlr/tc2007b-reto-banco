@@ -18,7 +18,8 @@ struct PerfilAdminView: View {
     @State private var serviceHours: String = "0"
     
     @State private var isNotLogin : Bool = false
-    
+    @State private var hide : Bool = false
+
     var body : some View{
         NavigationStack{
             if isNotLogin{
@@ -28,6 +29,7 @@ struct PerfilAdminView: View {
                 content
             }
         }
+        .navigationBarBackButtonHidden(hide)
     }
     
     
@@ -144,6 +146,7 @@ struct PerfilAdminView: View {
                     ZStack{
                         Button( action: {
                             logOut()
+                            hide.toggle()
                             isNotLogin.toggle()
                         }, label: {
                             Text("Cerrar Sesión")

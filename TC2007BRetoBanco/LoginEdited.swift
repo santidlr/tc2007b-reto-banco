@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct LoginEdited: View {
+    
     @State private var identificador = ""
     
     
@@ -195,19 +196,21 @@ struct LoginEdited: View {
                     .padding(.top, -40)
                 }
             }
-            .onAppear {
-                Auth.auth().addStateDidChangeListener { auth, user in
-                    if user != nil{
-                        identificador = user!.uid
-    //                    let trabajador: Worker = FirestoreManager.getWorkerByID(workerID: identificador, completion: )
-                        FirestoreManager.getInfoTrabajadorS { fetchedTrabajadores in
-                            DispatchQueue.main.async {
-                                self.trabajadores = fetchedTrabajadores
-                                if let user = fetchedTrabajadores.first(where: { $0.id == identificador }) {
-                                    self.userIsAdmin = user.isAdmin
-                                    print("id: \(identificador)")
-                                }
-                                
+
+        }
+        .navigationBarBackButtonHidden(false)
+        .onAppear {
+            Auth.auth().addStateDidChangeListener { auth, user in
+                if user != nil{
+                    userIsLoggedIn.toggle()
+                    identificador = user!.uid
+//                    let trabajador: Worker = FirestoreManager.getWorkerByID(workerID: identificador, completion: )
+                    FirestoreManager.getInfoTrabajadorS { fetchedTrabajadores in
+                        DispatchQueue.main.async {
+                            self.trabajadores = fetchedTrabajadores
+                            if let user = fetchedTrabajadores.first(where: { $0.id == identificador }) {
+                                self.userIsAdmin = user.isAdmin
+                                print("id: \(identificador)")
                             }
                         }
                         withAnimation(.smooth(duration: 0.8)){
