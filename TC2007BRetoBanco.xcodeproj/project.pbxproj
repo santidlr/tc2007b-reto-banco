@@ -15,6 +15,7 @@
 		297A7AE02AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */; };
 		297A7AE22AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */; };
 		29CB5EF62ACFE19600A59638 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29CB5EF52ACFE19600A59638 /* GoogleService-Info.plist */; };
+		29ECBAD22AE0736200C9C027 /* Registro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29ECBAD12AE0736200C9C027 /* Registro.swift */; };
 		530447642ACD420400768F50 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 530447632ACD420400768F50 /* FirebaseAnalytics */; };
 		530447662ACD420400768F50 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 530447652ACD420400768F50 /* FirebaseAnalyticsOnDeviceConversion */; };
 		530447682ACD420400768F50 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 530447672ACD420400768F50 /* FirebaseAnalyticsSwift */; };
@@ -93,6 +94,7 @@
 		297A7ADF2AC67C520014F0C4 /* TC2007BRetoBancoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITests.swift; sourceTree = "<group>"; };
 		297A7AE12AC67C520014F0C4 /* TC2007BRetoBancoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TC2007BRetoBancoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		29CB5EF52ACFE19600A59638 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		29ECBAD12AE0736200C9C027 /* Registro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registro.swift; sourceTree = "<group>"; };
 		5359E96D2ADE41F00081D063 /* aceptarEntrega.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aceptarEntrega.swift; sourceTree = "<group>"; };
 		53A8B3022ACEBE6B00AB7513 /* detallesEntrega.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detallesEntrega.swift; sourceTree = "<group>"; };
 		53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				FBFF97462ADFBE5700A1922A /* TrabajadorSocalViews */,
 				53AC25102ACE6FC9001E7B3D /* FirestoreManager.swift */,
 				8B4CCE8F2ADED1E60086E9F0 /* LoginEdited.swift */,
+				29ECBAD12AE0736200C9C027 /* Registro.swift */,
 				297A7AC62AC67C510014F0C4 /* ContentView.swift */,
 				297A7AC42AC67C510014F0C4 /* TC2007BRetoBancoApp.swift */,
 				29CB5EF52ACFE19600A59638 /* GoogleService-Info.plist */,
@@ -453,6 +456,7 @@
 				53A8B3032ACEBE6B00AB7513 /* detallesEntrega.swift in Sources */,
 				FBFF974A2ADFCE7500A1922A /* MenuAdminView.swift in Sources */,
 				FBFF974D2ADFD26F00A1922A /* PerfilAdminView.swift in Sources */,
+				29ECBAD22AE0736200C9C027 /* Registro.swift in Sources */,
 				53BAEC712ADDE7370043CC96 /* elegirEntrega.swift in Sources */,
 				8BDF5D932ADC7565007F8139 /* MenuView.swift in Sources */,
 				8B6F27B42ADDAFC3004A3F37 /* listaBenEditado.swift in Sources */,
