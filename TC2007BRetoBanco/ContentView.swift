@@ -7,18 +7,19 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    var id = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, Banco!")
-        }
-        .padding()
+        MenuView(id: id)
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentViewPreviews: PreviewProvider{
+    static var previews: some View{
+        ContentView()
+    }
 }
+
+
