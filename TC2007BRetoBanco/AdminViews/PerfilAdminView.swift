@@ -9,13 +9,17 @@ import SwiftUI
 import Firebase
 
 struct PerfilAdminView: View {
-    var id = ""
+    @AppStorage("userID") var id = ""
+//    var id = ""
     
     @State private var trabajadores : [TrabajadorSocial] = []
     
     @State private var username : String = "username"
     @State private var email: String = "something@banmx.com"
     @State private var serviceHours: String = "0"
+    
+    @AppStorage("userIsLoggedIn") var userIsLoggedIn = false
+    @AppStorage("userIsAdmin") var userIsAdmin = false
     
     @State private var isNotLogin : Bool = false
     @State private var hide : Bool = false
@@ -148,6 +152,9 @@ struct PerfilAdminView: View {
                             logOut()
                             hide.toggle()
                             isNotLogin.toggle()
+                            userIsLoggedIn = false
+                            userIsAdmin = false
+                            id = ""
                         }, label: {
                             Text("Cerrar Sesión")
                                 .font(Font.custom("Poppins-Regular", size: 20))

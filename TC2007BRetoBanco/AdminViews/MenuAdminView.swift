@@ -9,7 +9,9 @@ import SwiftUI
 import Firebase
 
 struct MenuAdminView: View {
-        var id = ""
+//        var id = ""
+        @AppStorage("userID") var id = ""
+
         // Seguramente va a cambiar a Administrador, a menos que lo dejemos juntos
         @State private var trabajadores : [TrabajadorSocial] = []
         

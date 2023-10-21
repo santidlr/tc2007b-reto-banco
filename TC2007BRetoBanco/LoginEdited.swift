@@ -10,11 +10,12 @@ import Firebase
 
 struct LoginEdited: View {
     
-    @State private var identificador = ""
+//    @State private var identificador = ""
     
     
     @State private var trabajadores : [TrabajadorSocial] = []
     @State private var userName : String = "username"
+    @State private var isShowingAlert = false
     
     @State private var email = ""
     @State private var password = ""
@@ -22,6 +23,8 @@ struct LoginEdited: View {
 //    @State private var userIsAdmin = false
     @AppStorage("userIsLoggedIn") var userIsLoggedIn = false
     @AppStorage("userIsAdmin") var userIsAdmin = false
+    @AppStorage("userID") var identificador = ""
+    
 //    @AppStorage("worker") var worker: Worker = [id: String,
 //    email: String,
 //    firstname: String,
@@ -152,10 +155,7 @@ struct LoginEdited: View {
                             .frame(height: 80)
                         
                         // Login
-                        Button {
-                            print("Login")
-                            login()
-                        } label: {
+                        Button(action:{login()}){
                             ZStack{
                                 Rectangle()
                                   .foregroundColor(.clear)
@@ -170,6 +170,13 @@ struct LoginEdited: View {
                                     .frame(width: 267, height: 68, alignment: .center)
                             }
                             .frame(width: 267, height: 68)
+                        }
+                        .alert(isPresented: $isShowingAlert){ // Alert to notify the user the report creation success or failure.
+                            Alert(
+                                title: Text("Hubo un error al iniciar sesión"),
+                                message: nil,
+                                dismissButton: .default(Text("Ok"))
+                            )
                         }
                         
                         // Registro
@@ -222,41 +229,79 @@ struct LoginEdited: View {
     }
     
     func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if error != nil{
-                print(error!.localizedDescription)
+        print("Login")
+        if email.isEmpty == true || password.isEmpty == true{
+            isShowingAlert = true
+        }
+        else{
+            if verifyEmail(email: email){
+                Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                    if error != nil{
+                        isShowingAlert = true
+                        print(error!.localizedDescription)
+                    }
+                    else{
+                        FirestoreManager.getWorkerByID(workerID: result!.user.uid){ worker in
+                            userIsAdmin = worker!.isAdmin
+                        }
+                        identificador = result!.user.uid
+                        withAnimation(.easeInOut(duration: 0.8)){
+                            userIsLoggedIn = true
+                        }
+                    }
+                }
             }
-            else{
-                FirestoreManager.getWorkerByID(workerID: result!.user.uid){ worker in
-                    userIsAdmin = worker!.isAdmin
-                }
-                identificador = result!.user.uid
-                withAnimation(.easeInOut(duration: 0.8)){
-                    userIsLoggedIn = true
-                }
+            else {
+                isShowingAlert = true
             }
         }
     }
     
     func register() {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-            } else{
-                let db = Firestore.firestore()
-                let ref = db.collection("trabajadores").document(result!.user.uid)
-                ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio", "isAdmin": false]) { error in
-                    identificador = result!.user.uid
-                    withAnimation(.easeInOut(duration: 0.8)){
-                        userIsLoggedIn = true
-                    }
-                    if let error = error{
-                        print(error.localizedDescription)
+        if email.isEmpty == true || password.isEmpty == true{
+            isShowingAlert = true
+        }
+        else {
+            if verifyEmail(email: email){
+                Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                    if error != nil {
+                        isShowingAlert = true
+                        print(error!.localizedDescription)
+                    } else{
+                        let db = Firestore.firestore()
+                        let ref = db.collection("trabajadores").document(result!.user.uid)
+                        ref.setData(["email": email, "firstName": "Pancracio", "horas": 0, "id": result!.user.uid, "lastName": "Potasio", "isAdmin": false]) { error in
+                            if let error = error{
+                                isShowingAlert = true
+                                print(error.localizedDescription)
+                            }
+                            identificador = result!.user.uid
+                            withAnimation(.easeInOut(duration: 0.8)){
+                                userIsLoggedIn = true
+                            }
+                        }
                     }
                 }
             }
+            else {
+                isShowingAlert = true
+            }
         }
     }
+    
+    func verifyEmail(email: String) -> Bool{
+        let emailRegex = "^[\\p{L}0-9!#$%&'*+\\/=?^_`{|}~-][\\p{L}0-9.!#$%&'*+\\/=?^_`{|}~-]{0,63}@[\\p{L}0-9-]+(?:\\.[\\p{L}0-9-]{2,7})*$"
+        
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        if emailPredicate.evaluate(with: email){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    
 }
 
 struct LoginEdited_Previews: PreviewProvider {

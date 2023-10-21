@@ -10,7 +10,9 @@ import Firebase
 
 
 struct PerfilView: View {
-    var id = ""
+    @AppStorage("userID") var id = ""
+
+//    var id = ""
     
     @State private var trabajadores : [TrabajadorSocial] = []
     
@@ -152,6 +154,7 @@ struct PerfilView: View {
                             isNotLogin.toggle()
                             userIsLoggedIn = false
                             userIsAdmin = false
+                            id = ""
                         }, label: {
                             Text("Cerrar Sesión")
                                 .font(Font.custom("Poppins-Regular", size: 20))

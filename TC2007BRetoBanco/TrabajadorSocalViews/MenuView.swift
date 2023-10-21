@@ -9,7 +9,9 @@ import SwiftUI
 import Firebase
 
 struct MenuView: View {
-    @State var id = ""
+//    @State var id = ""
+    @AppStorage("userID") var id = ""
+
     
     @State private var trabajadores : [TrabajadorSocial] = []
     

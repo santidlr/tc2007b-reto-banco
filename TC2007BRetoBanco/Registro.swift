@@ -9,14 +9,17 @@ import SwiftUI
 import Firebase
 
 struct Registro: View {
-    @State private var identificador = ""
+//    @State private var identificador = ""
     
     @State private var email = ""
     @State private var password = ""
     @State private var firstName = ""
     @State private var lastName = ""
+    @State private var isShowingAlert = false
+
     @AppStorage("userIsLoggedIn") var userIsLoggedIn = false
     @AppStorage("userIsAdmin") var userIsAdmin = false
+    @AppStorage("userID") var identificador = ""
     
     
     var body: some View {
@@ -196,6 +199,13 @@ struct Registro: View {
                         }
                         .frame(width: 267, height: 68)
                     }
+                    .alert(isPresented: $isShowingAlert){ // Alert to notify the user the report creation success or failure.
+                        Alert(
+                            title: Text("Hubo un error al registrate"),
+                            message: nil,
+                            dismissButton: .default(Text("Ok"))
+                        )
+                    }
                 }
                 .padding(.top, -40)
             }
@@ -214,22 +224,47 @@ struct Registro: View {
     }
     
     func register() {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-            } else{
-                let db = Firestore.firestore()
-                let ref = db.collection("trabajadores").document(result!.user.uid)
-                ref.setData(["email": result!.user.email!, "firstName": firstName, "horas": 0, "id": result!.user.uid, "lastName": lastName, "isAdmin": false]) { error in
-                    identificador = result!.user.uid
-                    withAnimation(.easeInOut(duration: 0.8)){
-                        userIsLoggedIn = true
-                    }
-                    if let error = error{
-                        print(error.localizedDescription)
+        if email.isEmpty == true || password.isEmpty == true{
+            isShowingAlert = true
+        }
+        else {
+            if verifyEmail(email: email){
+                Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                    if error != nil {
+                        isShowingAlert = true
+                        print(error!.localizedDescription)
+                    } else{
+                        let db = Firestore.firestore()
+                        let ref = db.collection("trabajadores").document(result!.user.uid)
+                        ref.setData(["email": email, "firstName": firstName, "horas": 0, "id": result!.user.uid, "lastName": lastName, "isAdmin": false]) { error in
+                            if let error = error{
+                                isShowingAlert = true
+                                print(error.localizedDescription)
+                            }
+                            identificador = result!.user.uid
+                            withAnimation(.easeInOut(duration: 0.8)){
+                                userIsLoggedIn = true
+                            }
+                        }
                     }
                 }
             }
+            else {
+                isShowingAlert = true
+            }
+        }
+    }
+    
+    func verifyEmail(email: String) -> Bool{
+        let emailRegex = "^[\\p{L}0-9!#$%&'*+\\/=?^_`{|}~-][\\p{L}0-9.!#$%&'*+\\/=?^_`{|}~-]{0,63}@[\\p{L}0-9-]+(?:\\.[\\p{L}0-9-]{2,7})*$"
+        
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        if emailPredicate.evaluate(with: email){
+            return true
+        }
+        else{
+            return false
         }
     }
 }
